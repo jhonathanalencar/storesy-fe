@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "json-server": "json-server db.json -p 8000",
     "lint": "next lint",
     "lint:fix": "eslint . --fix --max-warnings=0"
   },
@@ -23,6 +24,7 @@
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "json-server": "^0.17.4",
     "postcss": "^8",
     "prettier": "^3.1.1",
     "prettier-plugin-tailwindcss": "^0.5.9",

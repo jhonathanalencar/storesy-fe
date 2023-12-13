@@ -1,0 +1,80 @@
+{
+  "products": [
+    {
+      "productId": "7ddfb3ef-ec05-4f8c-8097-6d460deaf853",
+      "name": "HarmonyPod Wireless Earbuds",
+      "slug": "harmonypod-wireless-earbuds",
+      "price": 6999,
+      "summary": "Immerse yourself in unparalleled audio bliss with HarmonyPod Wireless Earbuds. These sleek and compa...",
+      "categories": ["technology", "headphones"],
+      "imageUrl": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "is_deal": true,
+      "discount_percent": 0.3,
+      "quantity_available": 4,
+      "created_at": "2023-12-10T10:00:00",
+      "updated_at": "2023-12-10T10:00:00",
+      "released_date": "2023-12-13T10:00:00",
+      "ratings": [
+        {
+          "user_id": "af6890a3-6a60-4c0b-a36d-8306df226c5d",
+          "username": "Alice",
+          "profile_image_url": "https://images.pexels.com/photos/371160/pexels-photo-371160.jpeg",
+          "rate": 4,
+          "content": "commentary",
+          "posted_at": "2023-12-13T10:00:00",
+          "edited_at": "2023-12-13T12:00:00"
+        },
+        {
+          "user_id": "db342e58-d460-4c8f-9429-64b9fd3ecfab",
+          "username": "Mary",
+          "profile_image_url": "https://images.pexels.com/photos/247287/pexels-photo-247287.jpeg",
+          "rate": 2,
+          "content": "commentary 2",
+          "posted_at": "2023-12-13T10:00:00",
+          "edited_at": "2023-12-13T12:00:00"
+        }
+      ]
+    },
+    {
+      "productId": "7ddfb3ef-ec05-4f8c-8097-6d460deaf853",
+      "name": "EcoFresh Bamboo Toothbrush Set",
+      "slug": "ecofresh-bamboo-toothbrush-set",
+      "price": 1499,
+      "summary": "Make your daily routine eco-friendly with the EcoFresh Bamboo Toothbrush Set. Crafted from...",
+      "categories": ["sustainability", "toothbrush", "oral care"],
+      "imageUrl": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "is_deal": false,
+      "discount_percent": 0,
+      "quantity_available": 10,
+      "created_at": "2023-12-10T10:00:00",
+      "updated_at": "2023-12-10T10:00:00",
+      "released_date": "2023-12-13T10:00:00",
+      "ratings": [
+        {
+          "user_id": "af6890a3-6a60-4c0b-a36d-8306df226c5d",
+          "username": "Alice",
+          "profile_image_url": "https://images.pexels.com/photos/371160/pexels-photo-371160.jpeg",
+          "rate": 5,
+          "content": "commentary",
+          "posted_at": "2023-12-15T10:00:00"
+        }
+      ]
+    },
+    {
+      "productId": "7ddfb3ef-ec05-4f8c-8097-6d460deaf853",
+      "name": "GloFit Smart Fitness Tracker",
+      "slug": "glofit-smart-fitness-tracker",
+      "price": 7999,
+      "summary": "Revolutionize your fitness journey with the GloFit Smart Fitness Tracker. Packed with advanced features...",
+      "categories": ["technology", "fitness", "digital watch"],
+      "imageUrl": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "is_deal": false,
+      "discount_percent": 0,
+      "quantity_available": 12,
+      "created_at": "2023-12-10T10:00:00",
+      "updated_at": "2023-12-10T10:00:00",
+      "released_date": "2023-12-13T10:00:00",
+      "ratings": []
+    }
+  ]
+}
