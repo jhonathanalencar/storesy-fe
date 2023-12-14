@@ -8,8 +8,7 @@ export function RecommendationsInterface({
   products,
 }: RecommendationsInterfaceProps) {
   return (
-    <section>
-      <h1>Storesy</h1>
+    <section className="mx-auto w-full max-w-5xl bg-red-100">
       <h3>Deals</h3>
       <ul>
         {products.map((product) => {
