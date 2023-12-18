@@ -7,7 +7,7 @@ export async function RecommendationsContainer() {
 
   return (
     <AppLayout>
-      <RecommendationsInterface products={products} />;
+      <RecommendationsInterface products={products} />
     </AppLayout>
   );
 }
