@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Merriweather_Sans } from 'next/font/google';
 
-import { RootInfrastructure } from '@/shared/modules/infrastructure/root.infrastructure';
+import { RootInfrastructure } from '@shared/modules/infrastructure/root.infrastructure';
 
 const merriweather_sans = Merriweather_Sans({ subsets: ['latin'] });
 

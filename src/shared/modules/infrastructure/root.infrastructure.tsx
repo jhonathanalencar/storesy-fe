@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import '../../../assets/styles/globals.css';
+import '@assets/styles/globals.css';
 
 interface RootInfrastructureProps {
   children: ReactNode;

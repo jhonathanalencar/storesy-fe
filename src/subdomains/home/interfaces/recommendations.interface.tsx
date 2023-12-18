@@ -1,5 +1,5 @@
-import { ProductCard } from '@/shared/modules/components/product-card.component';
-import { TProduct } from '@/shared/modules/types/product.type';
+import { ProductCard } from '@shared/modules/components/product-card.component';
+import { TProduct } from '@shared/modules/types/product.type';
 
 interface RecommendationsInterfaceProps {
   products: TProduct[];
