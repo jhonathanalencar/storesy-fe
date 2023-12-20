@@ -9,8 +9,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
-    <Link key={product.product_id} href={`/products/${product.slug}`}>
-      <div className="flex animate-fade-in flex-col gap-1 rounded bg-zinc-800 p-2 shadow-lg">
+    <Link href={`/products/${product.slug}`}>
+      <div className="flex w-fit animate-fade-in flex-col gap-1 rounded bg-zinc-800 p-2 shadow-lg">
         <div className="h-56 w-48 animate-shimmer bg-shimmer">
           <Image
             src={product.image_url}
