@@ -5,6 +5,7 @@
       "name": "HarmonyPod Wireless Earbuds",
       "slug": "harmonypod-wireless-earbuds",
       "price": 6999,
+      "description": "Immerse yourself in unparalleled audio bliss with HarmonyPod Wireless Earbuds. These sleek and compact earbuds deliver crystal-clear sound and deep bass, providing an immersive listening experience. With touch controls, a secure fit, and long-lasting battery life, HarmonyPod is the perfect companion for music lovers on the go. Elevate your auditory journey and embrace the harmony of superior sound quality with HarmonyPod Wireless Earbuds.",
       "summary": "Immerse yourself in unparalleled audio bliss with HarmonyPod Wireless Earbuds. These sleek and compa...",
       "categories": ["technology", "headphones"],
       "image_url": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -16,6 +17,7 @@
       "released_date": "2023-12-13T10:00:00",
       "ratings": [
         {
+          "rate_id": "1",
           "user_id": "af6890a3-6a60-4c0b-a36d-8306df226c5d",
           "username": "Alice",
           "profile_image_url": "https://images.unsplash.com/photo-1553514029-1318c9127859?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY2fHx3b21hbnxlbnwwfHwwfHx8MA%3D%3D",
@@ -25,6 +27,7 @@
           "edited_at": "2023-12-13T12:00:00"
         },
         {
+          "rate_id": "2",
           "user_id": "db342e58-d460-4c8f-9429-64b9fd3ecfab",
           "username": "Mary",
           "profile_image_url": "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8ODh8fHdvbWFufGVufDB8fDB8fHww",
@@ -40,17 +43,19 @@
       "name": "EcoFresh Bamboo Toothbrush Set",
       "slug": "ecofresh-bamboo-toothbrush-set",
       "price": 1499,
+      "description": "Make your daily routine eco-friendly with the EcoFresh Bamboo Toothbrush Set. Crafted from sustainably sourced bamboo, these toothbrushes offer a stylish and environmentally conscious alternative to traditional plastic brushes. The set includes four brushes with charcoal-infused bristles for a refreshing clean. Upgrade your oral care routine while contributing to a greener planet with the EcoFresh Bamboo Toothbrush Set.",
       "summary": "Make your daily routine eco-friendly with the EcoFresh Bamboo Toothbrush Set. Crafted from...",
       "categories": ["sustainability", "toothbrush", "oral care"],
       "image_url": "https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "is_deal": false,
-      "discount_percent": 0,
+      "is_deal": true,
+      "discount_percent": 0.05,
       "quantity_available": 10,
       "created_at": "2023-12-10T10:00:00",
       "updated_at": "2023-12-10T10:00:00",
       "released_date": "2023-12-13T10:00:00",
       "ratings": [
         {
+          "rate_id": "1",
           "user_id": "af6890a3-6a60-4c0b-a36d-8306df226c5d",
           "username": "Alice",
           "profile_image_url": "https://images.unsplash.com/photo-1553514029-1318c9127859?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTY2fHx3b21hbnxlbnwwfHwwfHx8MA%3D%3D",
@@ -65,6 +70,7 @@
       "name": "GloFit Smart Fitness Tracker",
       "slug": "glofit-smart-fitness-tracker",
       "price": 7999,
+      "description": "Revolutionize your fitness journey with the GloFit Smart Fitness Tracker. Packed with advanced features, this sleek wearable is your personal health companion. Track your steps, monitor heart rate, analyze sleep patterns, and receive real-time notifications seamlessly. With a vibrant touch display and water-resistant design, the GloFit ensures you stay connected and motivated throughout your day. Elevate your fitness experience and embrace a healthier, more informed lifestyle with the GloFit Smart Fitness Tracker.",
       "summary": "Revolutionize your fitness journey with the GloFit Smart Fitness Tracker. Packed with advanced features...",
       "categories": ["technology", "fitness", "digital watch"],
       "image_url": "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?q=80&w=2088&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",

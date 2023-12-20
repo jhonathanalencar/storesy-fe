@@ -13,3 +13,20 @@
   );
   background-size: 200% 200%;
 }
+
+.product-content-grid {
+  grid-template-areas: 'image details actions';
+  grid-template-columns: fit 1fr auto;
+}
+
+.product-image {
+  grid-area: image;
+}
+
+.product-details {
+  grid-area: details;
+}
+
+.product-actions {
+  grid-area: actions;
+}

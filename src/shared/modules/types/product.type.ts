@@ -1,3 +1,5 @@
+import type { TRate } from './rate.type';
+
 export type TProduct = {
   product_id: string;
   name: string;
@@ -13,4 +15,5 @@ export type TProduct = {
   created_at: Date;
   updated_at: Date;
   released_date?: Date;
+  ratings: TRate[];
 };
