@@ -13,9 +13,9 @@ export function ProductDetailsInterface({
   const discount = (product.price / 100) * product.discount_percent;
   const price = product.price / 100 - discount;
   return (
-    <section className="mx-auto w-full max-w-6xl p-2">
-      <div className="product-content-grid grid">
-        <div className="product-image flex w-full justify-center">
+    <section className="mx-auto w-full max-w-xl px-2 py-4 md:max-w-6xl">
+      <div className="product-content-grid grid gap-4">
+        <div className="product-image">
           <Image
             alt={product.name}
             src={product.image_url}
@@ -23,9 +23,10 @@ export function ProductDetailsInterface({
             height="0"
             sizes="100vw"
             priority
-            className="aspect-video h-full w-2/3 rounded object-cover"
+            className="aspect-video h-fit w-full rounded object-cover"
           />
         </div>
+
         <div className="product-details flex flex-col ">
           <h1>{product.name}</h1>
           <div>

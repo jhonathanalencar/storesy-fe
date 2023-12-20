@@ -15,8 +15,18 @@
 }
 
 .product-content-grid {
-  grid-template-areas: 'image details actions';
-  grid-template-columns: fit 1fr auto;
+  grid-template-areas:
+    'image'
+    'actions'
+    'details';
+  grid-template-columns: auto;
+}
+
+@media (min-width: 48em) {
+  .product-content-grid {
+    grid-template-areas: 'image details actions';
+    grid-template-columns: fit 1fr auto;
+  }
 }
 
 .product-image {
