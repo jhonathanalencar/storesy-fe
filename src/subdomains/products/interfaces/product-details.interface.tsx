@@ -2,6 +2,7 @@ import Image from 'next/image';
 
 import { formatPrice } from '@shared/modules/utils/format.utils';
 import type { TProduct } from '@shared/modules/types/product.type';
+import { ProductAvailability } from '../components/product-availability.component';
 
 interface ProductDetailsInterfaceProps {
   product: TProduct;
@@ -27,7 +28,7 @@ export function ProductDetailsInterface({
           />
         </div>
 
-        <div className="product-details flex flex-col ">
+        <div className="product-details flex flex-col">
           <h1>{product.name}</h1>
           <div>
             <span>{product.ratings?.[0]?.rate}</span>
@@ -52,11 +53,14 @@ export function ProductDetailsInterface({
           <h3>Product Description</h3>
           <p>{product.description}</p>
         </div>
+
         <div className="product-actions flex w-full flex-col bg-zinc-800 p-2">
-          <span>{formatPrice(price)}</span>
-          <span>
-            {product.quantity_available > 0 ? 'In Stock' : 'Sold out'}
+          <span className="text-lg font-black tracking-tight text-zinc-200">
+            {formatPrice(price)}
           </span>
+          <ProductAvailability
+            quantity_available={product.quantity_available}
+          />
           <label htmlFor="quantity">Qty:</label>
           <select>
             <option value={1}>1</option>
