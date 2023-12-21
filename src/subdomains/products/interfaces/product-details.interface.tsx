@@ -2,8 +2,9 @@ import Image from 'next/image';
 
 import { formatPrice } from '@shared/modules/utils/format.utils';
 import type { TProduct } from '@shared/modules/types/product.type';
-import { ProductAvailability } from '../components/product-availability.component';
 
+import { ProductAvailability } from '../components/product-availability.component';
+import { QuantitySelect } from '../components/quantity-select.component';
 interface ProductDetailsInterfaceProps {
   product: TProduct;
 }
@@ -13,6 +14,7 @@ export function ProductDetailsInterface({
 }: ProductDetailsInterfaceProps) {
   const discount = (product.price / 100) * product.discount_percent;
   const price = product.price / 100 - discount;
+
   return (
     <section className="mx-auto w-full max-w-xl px-2 py-4 md:max-w-6xl">
       <div className="product-content-grid grid gap-4">
@@ -61,14 +63,7 @@ export function ProductDetailsInterface({
           <ProductAvailability
             quantity_available={product.quantity_available}
           />
-          <label htmlFor="quantity">Qty:</label>
-          <select>
-            <option value={1}>1</option>
-            <option value={2}>2</option>
-            <option value={'...'}>...</option>
-            <option value={19}>19</option>
-            <option value={20}>20</option>
-          </select>
+          <QuantitySelect quantityAvailable={product.quantity_available} />
           <button>add to Cart</button>
           <button>Buy Now</button>
         </div>
