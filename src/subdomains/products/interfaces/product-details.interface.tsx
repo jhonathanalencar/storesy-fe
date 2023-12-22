@@ -5,6 +5,8 @@ import type { TProduct } from '@shared/modules/types/product.type';
 
 import { ProductAvailability } from '../components/product-availability.component';
 import { QuantitySelect } from '../components/quantity-select.component';
+import { ProductRating } from '../components/product-rating.component';
+
 interface ProductDetailsInterfaceProps {
   product: TProduct;
 }
@@ -34,10 +36,7 @@ export function ProductDetailsInterface({
           <h1 className="text-xl font-semibold tracking-wide text-zinc-100">
             {product.name}
           </h1>
-          <div>
-            <span>{product.ratings?.[0]?.rate}</span>
-            <span>{product.ratings.length} ratings</span>
-          </div>
+          <ProductRating ratings={product.ratings} />
 
           <div className="my-2 h-px w-full bg-slate-700" />
 
@@ -56,6 +55,8 @@ export function ProductDetailsInterface({
             </>
           ) : null}
 
+          <div className="my-2 h-px w-full bg-slate-700" />
+
           <h3 className="text-lg font-medium text-zinc-200">
             Product Description
           </h3>
@@ -73,10 +74,10 @@ export function ProductDetailsInterface({
           />
           <QuantitySelect quantityAvailable={product.quantity_available} />
           <div className="mb-2 mt-4 flex flex-col gap-2">
-            <button className="mx-auto w-4/5 rounded bg-violet-700 py-2 font-semibold text-zinc-200 transition-colors hover:bg-violet-800 md:w-52">
+            <button className="mx-auto w-4/5 rounded bg-violet-700 py-2 font-semibold text-black transition-colors hover:bg-violet-800 md:w-52">
               Add to Cart
             </button>
-            <button className="mx-auto w-4/5 rounded bg-yellow-600 py-2 font-semibold text-zinc-200 transition-colors hover:bg-yellow-700 md:w-52">
+            <button className="mx-auto w-4/5 rounded bg-yellow-600 py-2 font-semibold text-black transition-colors hover:bg-yellow-700 md:w-52">
               Buy Now
             </button>
           </div>
