@@ -24,6 +24,15 @@
 
 @media (min-width: 48em) {
   .product-content-grid {
+    grid-template-areas:
+      'image image actions'
+      'details details actions';
+    grid-template-columns: fit 1fr auto;
+  }
+}
+
+@media (min-width: 60em) {
+  .product-content-grid {
     grid-template-areas: 'image details actions';
     grid-template-columns: fit 1fr auto;
   }
