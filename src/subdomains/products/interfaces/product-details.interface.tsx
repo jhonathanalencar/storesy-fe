@@ -31,12 +31,16 @@ export function ProductDetailsInterface({
         </div>
 
         <div className="product-details flex flex-col">
-          <h1>{product.name}</h1>
+          <h1 className="text-xl font-semibold tracking-wide text-zinc-100">
+            {product.name}
+          </h1>
           <div>
             <span>{product.ratings?.[0]?.rate}</span>
             <span>{product.ratings.length} ratings</span>
           </div>
-          <div className="h-0.5 w-full bg-slate-900" />
+
+          <div className="my-2 h-px w-full bg-slate-700" />
+
           {product.is_deal ? (
             <span className="w-fit bg-red-700 p-2 text-zinc-100">Deal</span>
           ) : null}
@@ -51,9 +55,13 @@ export function ProductDetailsInterface({
               </span>
             </>
           ) : null}
-          <div className="h-0.5 w-full bg-slate-900" />
-          <h3>Product Description</h3>
-          <p>{product.description}</p>
+
+          <h3 className="text-lg font-medium text-zinc-200">
+            Product Description
+          </h3>
+          <p className="text-base tracking-wide text-zinc-400">
+            {product.description}
+          </p>
         </div>
 
         <div className="product-actions flex h-fit w-full  flex-col rounded-lg bg-zinc-800 p-2 shadow-md md:file:p-4">
@@ -74,7 +82,9 @@ export function ProductDetailsInterface({
           </div>
         </div>
       </div>
-      <div className="h-0.5 w-full bg-slate-900" />
+
+      <div className="my-2 h-px w-full bg-slate-700" />
+
       <div className="grid grid-cols-2">
         <div>
           <h2>Customer reviews</h2>
