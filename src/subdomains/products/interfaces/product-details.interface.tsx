@@ -6,6 +6,7 @@ import type { TProduct } from '@shared/modules/types/product.type';
 import { ProductAvailability } from '../components/product-availability.component';
 import { QuantitySelect } from '../components/quantity-select.component';
 import { ProductRating } from '../components/product-rating.component';
+import { ProductPrice } from '../components/product-price.component';
 
 interface ProductDetailsInterfaceProps {
   product: TProduct;
@@ -41,19 +42,16 @@ export function ProductDetailsInterface({
           <div className="my-2 h-px w-full bg-slate-700" />
 
           {product.is_deal ? (
-            <span className="w-fit bg-red-700 p-2 text-zinc-100">Deal</span>
+            <span className="w-fit rounded bg-red-700 px-3 py-1 text-zinc-100">
+              Deal
+            </span>
           ) : null}
-          {product.is_deal ? (
-            <>
-              <p>
-                -{product.discount_percent * 100}%{' '}
-                {formatPrice(product.price / 100 - discount)}
-              </p>
-              <span className="line-through">
-                {formatPrice(product.price / 100)}
-              </span>
-            </>
-          ) : null}
+
+          <ProductPrice
+            isDeal={product.is_deal}
+            productPrice={product.price}
+            discountPercent={product.discount_percent}
+          />
 
           <div className="my-2 h-px w-full bg-slate-700" />
 
