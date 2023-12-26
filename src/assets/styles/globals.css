@@ -49,3 +49,20 @@
 .product-actions {
   grid-area: actions;
 }
+
+.navbar-content-grid {
+  grid-template-areas: 'logo search nav';
+  grid-template-columns: auto 1fr auto;
+}
+
+.navbar-logo {
+  grid-area: logo;
+}
+
+.navbar-search {
+  grid-area: search;
+}
+
+.navbar-nav {
+  grid-area: nav;
+}
