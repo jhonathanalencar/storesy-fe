@@ -3,6 +3,8 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import type { TRate } from '@/shared/modules/types/rate.type';
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
 import { Separator } from './separator.component';
+import Image from 'next/image';
+import { ReviewStarRating } from './review-star-rating.component';
 
 interface CustomerReviewsProps {
   ratings: TRate[];
@@ -34,7 +36,28 @@ export function CustomerReviews({ ratings }: CustomerReviewsProps) {
 
       <div>
         {ratings.map((rating) => {
-          return <p key={rating.rate_id}>{rating.content}</p>;
+          return (
+            <div key={rating.rate_id} className="flex flex-col gap-1">
+              <div className="flex items-center gap-2">
+                <Image
+                  alt={rating.username}
+                  src={rating.profile_image_url}
+                  sizes="100w"
+                  width={0}
+                  height={0}
+                  className="h-8 w-8 rounded-full object-cover"
+                />
+                <span className="text-sm text-zinc-300 ">
+                  {rating.username}
+                </span>
+              </div>
+              <ReviewStarRating.Root>
+                <ReviewStarRating.Fill amount={rating.rate} />
+                <ReviewStarRating.Empty amount={5 - rating.rate} />
+              </ReviewStarRating.Root>
+              <p>{rating.content}</p>
+            </div>
+          );
         })}
       </div>
     </div>
