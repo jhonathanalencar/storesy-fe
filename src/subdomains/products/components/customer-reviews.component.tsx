@@ -1,9 +1,10 @@
 import { StarIcon } from '@heroicons/react/24/solid';
 
 import type { TRate } from '@shared/modules/types/rate.type';
+
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
 import { Separator } from './separator.component';
-import { Review } from './review.component';
+import { ReviewList } from './review-list.component';
 
 interface CustomerReviewsProps {
   ratings: TRate[];
@@ -34,11 +35,7 @@ export function CustomerReviews({ ratings }: CustomerReviewsProps) {
         <Separator />
       </div>
 
-      <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 p-2">
-        {ratings.map((rating) => {
-          return <Review key={rating.rate_id} rating={rating} />;
-        })}
-      </div>
+      <ReviewList ratings={ratings} />
     </div>
   );
 }
