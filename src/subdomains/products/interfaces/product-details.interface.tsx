@@ -7,6 +7,8 @@ import { ProductAvailability } from '../components/product-availability.componen
 import { QuantitySelect } from '../components/quantity-select.component';
 import { ProductRating } from '../components/product-rating.component';
 import { ProductPrice } from '../components/product-price.component';
+import { Separator } from '../components/separator.component';
+import { CustomerReviews } from '../components/customer-reviews.component';
 
 interface ProductDetailsInterfaceProps {
   product: TProduct;
@@ -39,7 +41,7 @@ export function ProductDetailsInterface({
           </h1>
           <ProductRating ratings={product.ratings} />
 
-          <div className="my-2 h-px w-full bg-slate-700" />
+          <Separator />
 
           {product.is_deal ? (
             <span className="w-fit rounded bg-red-700 px-3 py-1 text-zinc-100">
@@ -53,10 +55,10 @@ export function ProductDetailsInterface({
             discountPercent={product.discount_percent}
           />
 
-          <div className="my-2 h-px w-full bg-slate-700" />
+          <Separator />
 
           <h3 className="text-lg font-medium text-zinc-200">
-            Product Description
+            Product description
           </h3>
           <p className="text-base tracking-wide text-zinc-400">
             {product.description}
@@ -72,30 +74,19 @@ export function ProductDetailsInterface({
           />
           <QuantitySelect quantityAvailable={product.quantity_available} />
           <div className="mb-2 mt-4 flex flex-col gap-2">
-            <button className="mx-auto w-4/5 rounded bg-violet-700 py-2 font-semibold text-black transition-colors hover:bg-violet-800 md:w-52">
+            <button className="mx-auto w-4/5 rounded bg-violet-600 py-2 font-semibold text-black transition-colors hover:bg-violet-700 md:w-52">
               Add to Cart
             </button>
-            <button className="mx-auto w-4/5 rounded bg-yellow-600 py-2 font-semibold text-black transition-colors hover:bg-yellow-700 md:w-52">
+            <button className="mx-auto w-4/5 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 md:w-52">
               Buy Now
             </button>
           </div>
         </div>
       </div>
 
-      <div className="my-2 h-px w-full bg-slate-700" />
+      <Separator />
 
-      <div className="grid grid-cols-2">
-        <div>
-          <h2>Customer reviews</h2>
-          <span>***** 4.7 out of 5</span>
-          <span>{product.ratings.length} ratings</span>
-        </div>
-        <div>
-          {product.ratings.map((rating) => {
-            return <p key={rating.rate_id}>{rating.content}</p>;
-          })}
-        </div>
-      </div>
+      <CustomerReviews ratings={product.ratings} />
     </section>
   );
 }
