@@ -19,7 +19,7 @@ export const styles = {
   }),
   menu: (styles: CSSObjectWithLabel) => ({
     ...styles,
-    backgroundColor: colors.zinc[900],
+    backgroundColor: colors.gray[800],
   }),
   menuList: (styles: CSSObjectWithLabel) => ({
     ...styles,
@@ -48,7 +48,7 @@ export const styles = {
   }),
   option: (styles: CSSObjectWithLabel, { isFocused }: OptionProps) => ({
     ...styles,
-    backgroundColor: isFocused ? colors.zinc[700] : colors.zinc[900],
+    backgroundColor: isFocused ? colors.gray[700] : colors.gray[800],
     color: colors.zinc[300],
     ':hover': {
       backgroundColor: colors.zinc[700],
