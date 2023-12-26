@@ -1,10 +1,9 @@
 import { StarIcon } from '@heroicons/react/24/solid';
 
-import type { TRate } from '@/shared/modules/types/rate.type';
+import type { TRate } from '@shared/modules/types/rate.type';
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
 import { Separator } from './separator.component';
-import Image from 'next/image';
-import { ReviewStarRating } from './review-star-rating.component';
+import { Review } from './review.component';
 
 interface CustomerReviewsProps {
   ratings: TRate[];
@@ -32,32 +31,12 @@ export function CustomerReviews({ ratings }: CustomerReviewsProps) {
         <span className="text-zinc-400">{ratings.length} ratings</span>
         <Separator />
         <RatingPercentageHistogram ratings={ratings} />
+        <Separator />
       </div>
 
-      <div>
+      <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 p-2">
         {ratings.map((rating) => {
-          return (
-            <div key={rating.rate_id} className="flex flex-col gap-1">
-              <div className="flex items-center gap-2">
-                <Image
-                  alt={rating.username}
-                  src={rating.profile_image_url}
-                  sizes="100w"
-                  width={0}
-                  height={0}
-                  className="h-8 w-8 rounded-full object-cover"
-                />
-                <span className="text-sm text-zinc-300 ">
-                  {rating.username}
-                </span>
-              </div>
-              <ReviewStarRating.Root>
-                <ReviewStarRating.Fill amount={rating.rate} />
-                <ReviewStarRating.Empty amount={5 - rating.rate} />
-              </ReviewStarRating.Root>
-              <p>{rating.content}</p>
-            </div>
-          );
+          return <Review key={rating.rate_id} rating={rating} />;
         })}
       </div>
     </div>
