@@ -9,10 +9,14 @@ import {
   XMarkIcon,
   UserCircleIcon,
   ChevronRightIcon,
+  ChevronLeftIcon,
 } from '@heroicons/react/24/solid';
 import * as Dialog from '@radix-ui/react-dialog';
+import { useState } from 'react';
 
 export function Navbar() {
+  const [activeMenuId, setActiveMenuId] = useState('1');
+
   return (
     <header className=" bg-zinc-950 shadow-md">
       <div className="navbar-content-grid mx-auto grid h-16 w-full max-w-5xl items-center gap-2 px-4 py-2">
@@ -68,21 +72,53 @@ export function Navbar() {
             </Dialog.Trigger>
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 bg-black/70" />
-              <Dialog.Content className="fixed left-0 top-0 h-full w-11/12 max-w-xs bg-zinc-600">
-                <div className="flex w-full items-center gap-1 bg-zinc-700">
+              <Dialog.Content className="fixed left-0 top-0 h-full w-11/12 max-w-xs overflow-hidden bg-zinc-600">
+                <div className="flex h-12 w-full items-center gap-1 bg-zinc-700">
                   <UserCircleIcon className="h-8 w-8 text-green-500" />
                   <span className="text-zinc-300">Hello, sign in</span>
                   <Dialog.Close className="ml-auto">
                     <XMarkIcon className="h-8 w-8 text-green-500" />
                   </Dialog.Close>
                 </div>
-                <h2>Shop By Department</h2>
-                <ul>
-                  <li className="flex items-center justify-between">
-                    <span>Electronics</span>
-                    <ChevronRightIcon className="h-6 w-6 text-green-500" />
-                  </li>
-                </ul>
+                <div id="menu-content">
+                  <ul
+                    data-menu-id="1"
+                    className={`absolute left-0 top-12 h-full w-full transition-transform  duration-200 ${
+                      activeMenuId === '1'
+                        ? 'visible translate-x-0'
+                        : 'invisible -translate-x-full '
+                    }`}
+                  >
+                    <li>Shop By Department</li>
+                    <li className="flex items-center justify-between">
+                      <button onClick={() => setActiveMenuId('2')}>
+                        <span>Electronics</span>
+                        <ChevronRightIcon className="h-6 w-6 text-green-500" />
+                      </button>
+                    </li>
+                  </ul>
+                  <ul
+                    data-menu-id="2"
+                    className={`absolute left-0 top-12 h-full w-full transition-transform duration-200 ${
+                      activeMenuId === '2'
+                        ? 'visible translate-x-0'
+                        : 'invisible translate-x-full '
+                    }`}
+                  >
+                    <li>
+                      <button onClick={() => setActiveMenuId('1')}>
+                        <ChevronLeftIcon className="h-6 w-6 text-green-500" />
+                        <span>Main menu</span>
+                      </button>
+                    </li>
+                    <li>Electronics</li>
+                    <li className="flex items-center justify-between">
+                      <Link href="/products/accessories">
+                        Accessories & Supplies
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
               </Dialog.Content>
             </Dialog.Portal>
           </Dialog.Root>
