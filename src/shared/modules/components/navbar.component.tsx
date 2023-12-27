@@ -1,14 +1,21 @@
+'use client';
+
 import Link from 'next/link';
 import {
   MagnifyingGlassIcon,
   UserIcon,
   ShoppingCartIcon,
+  Bars3Icon,
+  XMarkIcon,
+  UserCircleIcon,
+  ChevronRightIcon,
 } from '@heroicons/react/24/solid';
+import * as Dialog from '@radix-ui/react-dialog';
 
 export function Navbar() {
   return (
-    <header className="h-16 bg-zinc-950 px-4 py-2 shadow-md">
-      <div className="navbar-content-grid mx-auto grid h-full w-full max-w-5xl items-center gap-2">
+    <header className=" bg-zinc-950 shadow-md">
+      <div className="navbar-content-grid mx-auto grid h-16 w-full max-w-5xl items-center gap-2 px-4 py-2">
         <div className="navbar-logo h-full">
           <Link
             href="/"
@@ -52,6 +59,34 @@ export function Navbar() {
             <span className="self-end text-sm">Cart</span>
           </Link>
         </nav>
+      </div>
+      <div className="w-full bg-zinc-700 py-1">
+        <div className="mx-auto grid w-full max-w-5xl">
+          <Dialog.Root>
+            <Dialog.Trigger>
+              <Bars3Icon className="h-8 w-8 text-green-500" />
+            </Dialog.Trigger>
+            <Dialog.Portal>
+              <Dialog.Overlay className="fixed inset-0 bg-black/70" />
+              <Dialog.Content className="fixed left-0 top-0 h-full w-11/12 max-w-xs bg-zinc-600">
+                <div className="flex w-full items-center gap-1 bg-zinc-700">
+                  <UserCircleIcon className="h-8 w-8 text-green-500" />
+                  <span className="text-zinc-300">Hello, sign in</span>
+                  <Dialog.Close className="ml-auto">
+                    <XMarkIcon className="h-8 w-8 text-green-500" />
+                  </Dialog.Close>
+                </div>
+                <h2>Shop By Department</h2>
+                <ul>
+                  <li className="flex items-center justify-between">
+                    <span>Electronics</span>
+                    <ChevronRightIcon className="h-6 w-6 text-green-500" />
+                  </li>
+                </ul>
+              </Dialog.Content>
+            </Dialog.Portal>
+          </Dialog.Root>
+        </div>
       </div>
     </header>
   );
