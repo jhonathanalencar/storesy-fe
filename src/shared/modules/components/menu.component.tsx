@@ -79,7 +79,7 @@ function MenuItem({ callback, children, className = '' }: MenuItemProps) {
     <li className={`bg-zinc-600 px-2 py-1 hover:bg-zinc-500 ${className}`}>
       <button
         onClick={callback}
-        className="flex w-full items-center justify-between rounded py-2 pl-4 font-light text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+        className="flex w-full items-center justify-between rounded py-2 pl-4 font-light text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
       >
         {children}
       </button>
@@ -98,7 +98,7 @@ function MenuItemLink({ href, children, className = '' }: MenuItemLinkProps) {
     <li className={`bg-zinc-600 px-2 py-1 hover:bg-zinc-500 ${className}`}>
       <Link
         href={href}
-        className="inline-block w-full rounded py-2 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+        className="inline-block w-full rounded py-2 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
       >
         <span className="font-light text-zinc-200">{children}</span>
       </Link>
@@ -124,7 +124,7 @@ function MenuBackButton({
       >
         <button
           onClick={callback}
-          className="flex h-full w-full items-center gap-2 rounded py-3 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+          className="flex h-full w-full items-center gap-2 rounded py-3 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
         >
           <MenuArrowLeft />
           <span className="font-medium uppercase tracking-wide text-zinc-200">
