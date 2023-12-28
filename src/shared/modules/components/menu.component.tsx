@@ -90,8 +90,13 @@ interface MenuItemLinkProps {
 
 function MenuItemLink({ href, children, className = '' }: MenuItemLinkProps) {
   return (
-    <li className={`${className}`}>
-      <Link href={href}>{children}</Link>
+    <li className={`bg-zinc-600 px-2 py-1 hover:bg-zinc-500 ${className}`}>
+      <Link
+        href={href}
+        className="inline-block w-full rounded py-2 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+      >
+        <span className="font-light text-zinc-200">{children}</span>
+      </Link>
     </li>
   );
 }
@@ -114,7 +119,7 @@ function MenuBackButton({
       >
         <button
           onClick={callback}
-          className="flex h-full w-full items-center gap-2 rounded py-3 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-500"
+          className="flex h-full w-full items-center gap-2 rounded py-3 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
         >
           <MenuArrowLeft />
           <span className="font-medium uppercase tracking-wide text-zinc-200">
