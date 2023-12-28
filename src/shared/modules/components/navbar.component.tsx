@@ -14,7 +14,7 @@ export function Navbar() {
         <div className="navbar-logo h-full">
           <Link
             href="/"
-            className="inline-flex h-full items-center rounded-sm p-1 outline-1 transition-colors hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+            className="inline-flex h-full items-center rounded-sm p-1 outline-1 transition-colors hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
             <span className="text-2xl font-black tracking-tight text-green-400">
               Storesy
@@ -23,7 +23,7 @@ export function Navbar() {
         </div>
 
         <div className="navbar-search h-full">
-          <form className="flex h-full rounded bg-zinc-800 focus-within:ring-2 focus-within:ring-red-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-950">
+          <form className="flex h-full rounded bg-zinc-800 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-950">
             <input
               type="text"
               placeholder="Search"
@@ -31,7 +31,7 @@ export function Navbar() {
             />
             <button
               type="submit"
-              className="flex w-12 items-center justify-center rounded-br rounded-tr bg-green-500 transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+              className="flex w-12 items-center justify-center rounded-br rounded-tr bg-green-500 transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
             >
               <MagnifyingGlassIcon className="h-6 w-6 text-zinc-900" />
             </button>
@@ -41,14 +41,14 @@ export function Navbar() {
         <nav className="navbar-nav flex h-full gap-2">
           <Link
             href="/signin"
-            className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+            className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
             <UserIcon className="h-6 w-6 text-green-500" />
             <span className="self-end text-sm">Sign in</span>
           </Link>
           <Link
             href="/cart"
-            className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+            className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
           >
             <ShoppingCartIcon className="h-6 w-6 text-green-500" />
             <span className="self-end text-sm">Cart</span>
@@ -57,7 +57,9 @@ export function Navbar() {
       </div>
       <div className="w-full bg-zinc-700 py-1">
         <div className="mx-auto grid w-full max-w-5xl">
-          <MenuButton />
+          <div className="flex h-full w-fit rounded-sm outline-1 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-700 hover:outline">
+            <MenuButton />
+          </div>
         </div>
       </div>
     </header>
