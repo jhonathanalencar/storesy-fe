@@ -1,7 +1,7 @@
-import Link from 'next/link';
 import type { ReactNode } from 'react';
+import Link from 'next/link';
 import { twMerge } from 'tailwind-merge';
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/solid';
+import { ChevronRightIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 
 interface MenuRootProps {
   children: ReactNode;
@@ -108,11 +108,22 @@ function MenuBackButton({
   className = '',
 }: MenuBackButtonProps) {
   return (
-    <li className={`${className}`}>
-      <MenuArrowLeft />
-      <button onClick={callback}>{children}</button>
+    <>
+      <li
+        className={`cursor-pointer bg-zinc-600 px-2 py-1 transition-colors hover:bg-zinc-500 ${className}`}
+      >
+        <button
+          onClick={callback}
+          className="flex h-full w-full items-center gap-2 rounded py-3 pl-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-500"
+        >
+          <MenuArrowLeft />
+          <span className="font-medium uppercase tracking-wide text-zinc-200">
+            {children}
+          </span>
+        </button>
+      </li>
       <MenuSeparator />
-    </li>
+    </>
   );
 }
 
@@ -134,7 +145,7 @@ interface MenuSeparatorProps {
 }
 
 function MenuSeparator({ className = '' }: MenuSeparatorProps) {
-  return <li className={`h-2 w-full bg-zinc-500 ${className}`} />;
+  return <li className={`h-px w-full bg-zinc-400 ${className}`} />;
 }
 
 interface MenuArrowRightProps {
@@ -150,7 +161,7 @@ interface MenuArrowLeftProps {
 }
 
 function MenuArrowLeft({ className = '' }: MenuArrowLeftProps) {
-  return <ChevronLeftIcon className={`h-6 w-6 text-green-500 ${className}`} />;
+  return <ArrowLeftIcon className={`h-6 w-6 text-green-500 ${className}`} />;
 }
 
 export const Menu = {
