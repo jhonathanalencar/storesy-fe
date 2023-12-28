@@ -76,8 +76,13 @@ interface MenuItemProps {
 
 function MenuItem({ callback, children, className = '' }: MenuItemProps) {
   return (
-    <li className={`${className}`}>
-      <button onClick={callback}>{children}</button>
+    <li className={`bg-zinc-600 px-2 py-1 hover:bg-zinc-500 ${className}`}>
+      <button
+        onClick={callback}
+        className="flex w-full items-center justify-between rounded py-2 pl-4 font-light text-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500"
+      >
+        {children}
+      </button>
     </li>
   );
 }
