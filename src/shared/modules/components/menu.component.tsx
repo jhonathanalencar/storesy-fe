@@ -134,8 +134,12 @@ interface MenuTitleProps {
 
 function MenuTitle({ children, className = '' }: MenuTitleProps) {
   return (
-    <li className={`${className}`}>
-      <span className={`${className}`}>{children}</span>
+    <li className={`px-2 py-1 ${className}`}>
+      <span
+        className={`py-3 pl-4 text-lg font-semibold tracking-wide text-zinc-100 ${className}`}
+      >
+        {children}
+      </span>
     </li>
   );
 }
