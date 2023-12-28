@@ -80,7 +80,7 @@ export function Navbar() {
                     <XMarkIcon className="h-8 w-8 text-green-500" />
                   </Dialog.Close>
                 </div>
-                <div id="menu-content">
+                <div id="menu-content" className="overflow-x-hidden">
                   <ul
                     data-menu-id="1"
                     className={`absolute left-0 top-12 h-full w-full transition-transform  duration-200 ${
