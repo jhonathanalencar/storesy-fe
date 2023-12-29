@@ -8,7 +8,7 @@ import { Sidebar } from './sidebar.component';
 export function MenuButton() {
   return (
     <Dialog.Root>
-      <Dialog.Trigger className="outline-none">
+      <Dialog.Trigger title="menu" className="outline-none">
         <Bars3Icon className="h-8 w-8 text-green-500" />
       </Dialog.Trigger>
       <Sidebar />

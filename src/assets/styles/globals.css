@@ -52,7 +52,8 @@
 
 .navbar-content-grid {
   grid-template-areas: 'logo search nav';
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr 0%;
+  overflow: hidden;
 }
 
 .navbar-logo {
@@ -65,4 +66,27 @@
 
 .navbar-nav {
   grid-area: nav;
+  visibility: hidden;
+}
+
+@media (min-width: 30em) {
+  .navbar-content-grid {
+    grid-template-areas: 'logo search nav';
+    grid-template-columns: auto 1fr 0%;
+  }
+
+  .navbar-search {
+    visibility: visible;
+  }
+}
+
+@media (min-width: 40em) {
+  .navbar-content-grid {
+    grid-template-areas: 'logo search nav';
+    grid-template-columns: auto 1fr auto;
+  }
+
+  .navbar-nav {
+    visibility: visible;
+  }
 }
