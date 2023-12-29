@@ -1,19 +1,18 @@
-'use client';
-import { useState } from 'react';
-
 import type { TSelectOption } from '@shared/modules/types/react-select.type';
 
 import { SelectInput } from '@shared/modules/components/select.component';
 
 interface QuantitySelectProps {
+  selectedQuantity: TSelectOption;
+  setSelectedQuantity: (value: TSelectOption) => void;
   quantityAvailable: number;
 }
 
-export function QuantitySelect({ quantityAvailable }: QuantitySelectProps) {
-  const [quantity, setQuantity] = useState<TSelectOption>({
-    value: '1',
-    label: '1',
-  });
+export function QuantitySelect({
+  selectedQuantity,
+  setSelectedQuantity,
+  quantityAvailable,
+}: QuantitySelectProps) {
   const options = Array(quantityAvailable)
     .fill(0)
     .map((_, i) => {
@@ -34,8 +33,8 @@ export function QuantitySelect({ quantityAvailable }: QuantitySelectProps) {
         isSearchable
         options={options}
         className="w-24"
-        value={quantity}
-        onChange={(option) => setQuantity(option as TSelectOption)}
+        value={selectedQuantity}
+        onChange={(option) => setSelectedQuantity(option as TSelectOption)}
       />
     </div>
   );

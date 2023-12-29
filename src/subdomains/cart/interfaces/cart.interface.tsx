@@ -8,9 +8,10 @@ export function CartInterface() {
         <div className="w-full bg-zinc-600 p-4">
           <h1 className="text-2xl text-zinc-100">Shopping Cart</h1>
           <p className="text-sm font-light tracking-wide text-zinc-300">
-            Remove all items
+            Deselect all items
           </p>
           <Separator />
+          <div className="flex flex-col"></div>
         </div>
 
         <div className="w-fit bg-zinc-600 p-4 shadow-md">
