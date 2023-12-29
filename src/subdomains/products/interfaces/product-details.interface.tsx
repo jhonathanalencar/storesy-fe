@@ -7,8 +7,9 @@ import { ProductAvailability } from '../components/product-availability.componen
 import { QuantitySelect } from '../components/quantity-select.component';
 import { ProductRating } from '../components/product-rating.component';
 import { ProductPrice } from '../components/product-price.component';
-import { Separator } from '../components/separator.component';
+import { Separator } from '@shared/modules/components/separator.component';
 import { CustomerReviews } from '../components/customer-reviews.component';
+import { Section } from '@shared/modules/components/section.component';
 
 interface ProductDetailsInterfaceProps {
   product: TProduct;
@@ -21,7 +22,7 @@ export function ProductDetailsInterface({
   const price = product.price / 100 - discount;
 
   return (
-    <section className="mx-auto w-full max-w-xl px-2 py-4 md:max-w-6xl">
+    <Section className="max-w-xl md:max-w-6xl">
       <div className="product-content-grid grid gap-4">
         <div className="product-image">
           <Image
@@ -87,6 +88,6 @@ export function ProductDetailsInterface({
       <Separator />
 
       <CustomerReviews ratings={product.ratings} />
-    </section>
+    </Section>
   );
 }

@@ -3,7 +3,8 @@ import { StarIcon } from '@heroicons/react/24/solid';
 import type { TRate } from '@shared/modules/types/rate.type';
 
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
-import { Separator } from './separator.component';
+
+import { Separator } from '@shared/modules/components/separator.component';
 import { ReviewList } from './review-list.component';
 
 interface CustomerReviewsProps {
