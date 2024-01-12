@@ -7,7 +7,8 @@ import { CartInterface } from '../interfaces/cart.interface';
 
 function getStorageJSON() {
   let data: TCartProduct[] = [];
-  const storageJSON = localStorage?.getItem('@storesy:cart:0.0.1');
+  if (typeof window === 'undefined') return data;
+  const storageJSON = localStorage.getItem('@storesy:cart:0.0.1');
   if (storageJSON) {
     data = JSON.parse(storageJSON);
   }

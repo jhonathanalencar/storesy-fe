@@ -90,3 +90,8 @@
     visibility: visible;
   }
 }
+
+.product-cart-grid {
+  grid-template-areas: 'image description price';
+  grid-template-columns: auto 1fr auto;
+}

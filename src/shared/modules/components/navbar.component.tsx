@@ -25,6 +25,7 @@ export function Navbar() {
         <div className="navbar-search h-full">
           <form className="ml-auto flex h-full w-fit rounded bg-zinc-800 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-950 sm:ml-0 sm:w-full">
             <input
+              id="search"
               type="text"
               placeholder="Search"
               className="hidden h-full w-full bg-transparent p-2 text-zinc-400 outline-none sm:block"
