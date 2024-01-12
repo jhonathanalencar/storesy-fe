@@ -1,20 +1,24 @@
 'use client';
 
+import type { TCartProduct } from '@/shared/modules/types/cart.type';
+
 import { AppLayout } from '@shared/modules/layouts/app.layout';
 import { CartInterface } from '../interfaces/cart.interface';
 
 function getStorageJSON() {
+  let data: TCartProduct[] = [];
   const storageJSON = localStorage?.getItem('@storesy:cart:0.0.1');
   if (storageJSON) {
-    console.log(JSON.parse(storageJSON));
+    data = JSON.parse(storageJSON);
   }
+  return data;
 }
 
 export function CartContainer() {
-  getStorageJSON();
+  const products = getStorageJSON();
   return (
     <AppLayout>
-      <CartInterface />
+      <CartInterface products={products} />
     </AppLayout>
   );
 }

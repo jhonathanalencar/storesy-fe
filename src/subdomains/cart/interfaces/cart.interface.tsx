@@ -1,7 +1,14 @@
+import type { TCartProduct } from '@/shared/modules/types/cart.type';
+
 import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
+import { SavedProductsList } from '../components/saved-products-list.component';
 
-export function CartInterface() {
+interface CartInterfaceProps {
+  products: TCartProduct[];
+}
+
+export function CartInterface({ products }: CartInterfaceProps) {
   return (
     <Section>
       <div className="grid w-full grid-cols-[1fr_auto] gap-5">
@@ -11,7 +18,7 @@ export function CartInterface() {
             Deselect all items
           </p>
           <Separator />
-          <div className="flex flex-col"></div>
+          <SavedProductsList products={products} />
         </div>
 
         <div className="w-fit bg-zinc-600 p-4 shadow-md">
