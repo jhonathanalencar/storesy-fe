@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { CheckIcon } from '@heroicons/react/16/solid';
 
 import { formatPrice } from '@shared/modules/utils/format.utils';
 
@@ -25,8 +29,12 @@ export function CartProduct({
   return (
     <>
       <div className="product-cart-grid grid gap-3 py-2">
-        <div className="flex gap-2 [grid-area:image]">
-          <input type="checkbox" name="" id="" />
+        <div className="flex items-center gap-2 [grid-area:image]">
+          <Checkbox.Root className="flex h-4 w-4 items-center justify-center rounded bg-zinc-900 shadow outline-none hover:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-green-500">
+            <Checkbox.Indicator className="text-green-500">
+              <CheckIcon className="h-4 w-4" />
+            </Checkbox.Indicator>
+          </Checkbox.Root>
           <Image
             src={productUrl}
             alt={productTitle}
