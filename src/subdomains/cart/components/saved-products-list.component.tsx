@@ -29,5 +29,5 @@ export function SavedProductsList({ products }: SavedProductsListProps) {
       );
     });
   }
-  return <div className="flex flex-col">{content}</div>;
+  return <div className="flex w-full flex-col">{content}</div>;
 }
