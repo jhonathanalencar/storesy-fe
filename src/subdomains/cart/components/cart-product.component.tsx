@@ -28,7 +28,7 @@ export function CartProduct({
 }: CartProductProps) {
   return (
     <>
-      <div className="product-cart-grid grid w-full gap-3 py-2">
+      <div className="product-cart-grid grid gap-3 py-2">
         <div className="flex items-center gap-2 [grid-area:image]">
           <Checkbox.Root className="flex h-4 w-4 items-center justify-center rounded bg-zinc-900 shadow outline-none hover:bg-zinc-800 focus-visible:ring-2 focus-visible:ring-green-500">
             <Checkbox.Indicator className="text-green-500">
@@ -45,8 +45,8 @@ export function CartProduct({
             className="h-44 w-44 min-w-[11rem] rounded object-cover"
           />
         </div>
-        <div className="overflow-hidden [grid-area:description]">
-          <p className="line-clamp-3 break-words text-lg font-semibold tracking-wide text-zinc-200">
+        <div className="[grid-area:description]">
+          <p className="line-clamp-3 break-all text-lg font-semibold tracking-wide text-zinc-200">
             {productTitle}
           </p>
           <span className="text-sm font-light text-green-400">In Stock</span>
