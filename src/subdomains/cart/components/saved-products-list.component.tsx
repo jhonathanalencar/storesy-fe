@@ -20,6 +20,7 @@ export function SavedProductsList({ products }: SavedProductsListProps) {
         <CartProduct
           key={product.product_id}
           productId={product.product_id}
+          productSlug={product.product_slug}
           productUrl={product.product_url}
           productTitle={product.product_title}
           productQuantity={product.product_quantity}

@@ -32,6 +32,7 @@ export function ProductActions({ product, price }: ProductActions) {
         <AddToCartButton
           cartProduct={{
             product_id: product.product_id,
+            product_slug: product.slug,
             subtotal: price,
             product_url: product.image_url,
             product_title: product.name,

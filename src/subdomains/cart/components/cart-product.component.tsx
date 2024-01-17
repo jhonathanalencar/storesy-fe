@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import * as Checkbox from '@radix-ui/react-checkbox';
 import { CheckIcon } from '@heroicons/react/16/solid';
 
@@ -11,6 +12,7 @@ import { Separator } from '@shared/modules/components/separator.component';
 
 interface CartProductProps {
   productId: string;
+  productSlug: string;
   productUrl: string;
   productTitle: string;
   productQuantity: number;
@@ -20,6 +22,7 @@ interface CartProductProps {
 
 export function CartProduct({
   productId,
+  productSlug,
   productUrl,
   productTitle,
   productQuantity,
@@ -46,9 +49,12 @@ export function CartProduct({
           />
         </div>
         <div className="[grid-area:description]">
-          <p className="line-clamp-3 break-all text-lg font-semibold tracking-wide text-zinc-200">
+          <Link
+            href={`/products/${productSlug}`}
+            className="line-clamp-3 break-all text-lg font-semibold tracking-wide text-zinc-200"
+          >
             {productTitle}
-          </p>
+          </Link>
           <span className="text-sm font-light text-green-400">In Stock</span>
           <CartProductActions
             product_id={productId}
