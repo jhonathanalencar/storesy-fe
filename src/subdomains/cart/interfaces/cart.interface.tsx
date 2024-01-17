@@ -26,7 +26,7 @@ export function CartInterface({ products, subtotal }: CartInterfaceProps) {
           </p>
         </div>
 
-        <div className="row-start-1 w-fit bg-zinc-600 p-4 shadow-md lg:row-auto">
+        <div className="row-start-1 h-fit w-fit bg-zinc-600 p-4 shadow-md lg:row-auto">
           <p>No items selected</p>
           <button>Proceed to checkout</button>
         </div>
