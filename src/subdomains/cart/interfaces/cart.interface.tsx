@@ -1,15 +1,16 @@
-import type { TCartProduct } from '@/shared/modules/types/cart.type';
+import type { TCartProduct } from '@shared/modules/types/cart.type';
+import { formatPrice } from '@shared/modules/utils/format.utils';
 
 import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { SavedProductsList } from '../components/saved-products-list.component';
-import { ClientOnly } from '@/shared/modules/components/client-only';
 
 interface CartInterfaceProps {
   products: TCartProduct[];
+  subtotal: number;
 }
 
-export function CartInterface({ products }: CartInterfaceProps) {
+export function CartInterface({ products, subtotal }: CartInterfaceProps) {
   return (
     <Section>
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-[1fr_auto]">
@@ -19,11 +20,9 @@ export function CartInterface({ products }: CartInterfaceProps) {
             Deselect all items
           </p>
           <Separator className="bg-zinc-800" />
-          <ClientOnly>
-            <SavedProductsList products={products} />
-          </ClientOnly>
+          <SavedProductsList products={products} />
           <p className="ml-auto w-fit text-lg font-light text-zinc-100">
-            Subtotal: <span className="font-bold">$63.23</span>
+            Subtotal: <span className="font-bold">{formatPrice(subtotal)}</span>
           </p>
         </div>
 

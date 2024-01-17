@@ -1,9 +1,10 @@
 'use client';
 
-import type { TCartProduct } from '@/shared/modules/types/cart.type';
+import type { TCartProduct } from '@shared/modules/types/cart.type';
 
 import { AppLayout } from '@shared/modules/layouts/app.layout';
 import { CartInterface } from '../interfaces/cart.interface';
+import { ClientOnly } from '@shared/modules/components/client-only';
 
 function getStorageJSON() {
   let data: TCartProduct[] = [];
@@ -17,9 +18,14 @@ function getStorageJSON() {
 
 export function CartContainer() {
   const products = getStorageJSON();
+  const subtotal = products.reduce((acc, product) => {
+    return acc + product.subtotal * product.product_quantity;
+  }, 0);
   return (
     <AppLayout>
-      <CartInterface products={products} />
+      <ClientOnly>
+        <CartInterface products={products} subtotal={subtotal} />
+      </ClientOnly>
     </AppLayout>
   );
 }
