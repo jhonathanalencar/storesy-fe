@@ -1,31 +1,34 @@
-import { CART_STORAGE_KEY } from '@shared/modules/constants/storage.constant';
-import type { TCartProduct } from '@shared/modules/types/cart.type';
+import { cookies } from 'next/headers';
+import { randomUUID } from 'node:crypto';
+import pgp from 'pg-promise';
 
-export function getStorageCartJSON() {
-  let data: TCartProduct[] = [];
-  if (typeof window === 'undefined') return data;
-  const storageJSON = localStorage.getItem('@storesy:cart:0.0.1');
-  if (storageJSON) {
-    data = JSON.parse(storageJSON);
-  }
-  return data;
+import { CART_STORAGE_KEY } from '@shared/modules/constants/storage.constant';
+import type { TShoppingCart } from '@shared/modules/types/cart.type';
+
+export async function createCart(): Promise<TShoppingCart> {
+  const id = randomUUID();
+  const connection = pgp()('postgres://postgres:root@localhost:5432/app');
+  await connection.query(`insert into lak.cart (cart_id) values ($1)`, [id]);
+  await connection.$pool.end();
+  cookies().set(CART_STORAGE_KEY, id);
+  return {
+    cart_id: id,
+    items: [],
+    size: 0,
+    subtotal: 0,
+  };
 }
 
-export function updateProductQuantity(productId: string, quantity: number) {
-  let data: TCartProduct[] = [];
-  if (typeof window === 'undefined') return;
-  const storageJSON = localStorage.getItem(CART_STORAGE_KEY);
-  if (storageJSON) {
-    data = JSON.parse(storageJSON);
+export async function getCart(): Promise<TShoppingCart | null> {
+  const cartKey = cookies().get(CART_STORAGE_KEY)?.value;
+  if (!cartKey) {
+    return null;
   }
-  const newCart = data.map((product) => {
-    if (product.product_id === productId) {
-      return {
-        ...product,
-        product_quantity: quantity,
-      };
-    }
-    return product;
-  });
-  localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(newCart));
+  const connection = pgp()('postgres://postgres:root@localhost:5432/app');
+  const data = await connection.query<TShoppingCart>(
+    `select * from lak.cart where cart_id = $1`,
+    [cartKey]
+  );
+  await connection.$pool.end();
+  return data;
 }

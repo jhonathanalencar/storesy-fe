@@ -1,8 +1,6 @@
-'use client';
-
 import type { TProduct } from '@shared/modules/types/product.type';
 import { formatPrice } from '@shared/modules/utils/format.utils';
-import { useSelectedQuantity } from '@shared/modules/hooks/use-selected-quantity.hook';
+// import { useSelectedQuantity } from '@shared/modules/hooks/use-selected-quantity.hook';
 
 import { ProductAvailability } from './product-availability.component';
 import { QuantitySelect } from './quantity-select.component';
@@ -14,7 +12,7 @@ interface ProductActions {
 }
 
 export function ProductActions({ product, price }: ProductActions) {
-  const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity({});
+  // const { selectedQuantity, setSelectedQuantity } = useSelectedQuantity({});
 
   return (
     <div className="product-actions flex h-fit w-full  flex-col rounded-lg bg-zinc-800 p-2 shadow-md md:file:p-4">
@@ -22,12 +20,12 @@ export function ProductActions({ product, price }: ProductActions) {
         {formatPrice(price)}
       </span>
       <ProductAvailability quantity_available={product.quantity_available} />
-      <QuantitySelect
+      {/* <QuantitySelect
         id={product.product_id}
         selectedQuantity={selectedQuantity}
         setSelectedQuantity={setSelectedQuantity}
         quantityAvailable={product.quantity_available}
-      />
+      /> */}
       <div className="mb-2 mt-4 flex flex-col gap-2">
         <AddToCartButton
           cartProduct={{
@@ -36,7 +34,8 @@ export function ProductActions({ product, price }: ProductActions) {
             subtotal: price,
             product_url: product.image_url,
             product_title: product.name,
-            product_quantity: Number(selectedQuantity.value),
+            // product_quantity: Number(selectedQuantity.value),
+            product_quantity: 1,
             quantity_available: product.quantity_available,
           }}
         />
