@@ -1,4 +1,7 @@
-import { formatPrice } from '@shared/modules/utils/format.utils';
+import {
+  calculateProductDiscount,
+  formatPrice,
+} from '@shared/modules/utils/format.utils';
 
 interface ProductPrice {
   isDeal: boolean;
@@ -11,8 +14,7 @@ export function ProductPrice({
   productPrice,
   discountPercent,
 }: ProductPrice) {
-  const discount = (productPrice / 100) * discountPercent;
-  const price = productPrice / 100 - discount;
+  const price = calculateProductDiscount(productPrice, discountPercent);
   const content = isDeal ? (
     <div className="mt-1 flex w-fit flex-col">
       <p className="flex gap-1 text-xl text-zinc-200">

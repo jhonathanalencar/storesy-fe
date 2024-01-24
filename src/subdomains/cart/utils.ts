@@ -4,6 +4,7 @@ import { randomUUID } from 'node:crypto';
 import { CART_STORAGE_KEY } from '@shared/modules/constants/storage.constant';
 import { prisma } from '@/externals/storage/prisma.storage';
 import { Cart } from './entities';
+import { calculateProductDiscount } from '@shared/modules/utils/format.utils';
 
 export async function createCart(): Promise<Cart> {
   return prisma.$transaction(async (tx) => {
@@ -53,7 +54,10 @@ export async function getCart(): Promise<Cart | null> {
         item.product_id,
         item.product.name,
         item.product.slug,
-        item.product.price,
+        calculateProductDiscount(
+          item.product.price,
+          item.product.discount_percent
+        ),
         item.product.image_url,
         item.product.quantity_available
       );
