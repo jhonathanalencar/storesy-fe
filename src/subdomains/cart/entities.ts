@@ -29,8 +29,28 @@ export class Cart {
     return this.subtotal;
   }
 
-  setItems(items: CartItem[]) {
-    this.items = items;
+  addItem(
+    itemId: string,
+    quantity: number,
+    productId: string,
+    name: string,
+    slug: string,
+    price: number,
+    imageUrl: string,
+    quantityAvailable: number
+  ) {
+    this.items.push(
+      new CartItem(
+        itemId,
+        quantity,
+        productId,
+        name,
+        slug,
+        price,
+        imageUrl,
+        quantityAvailable
+      )
+    );
   }
 
   static create(cart_id: string, user_id: string | null) {

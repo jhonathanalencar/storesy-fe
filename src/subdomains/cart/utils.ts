@@ -6,69 +6,58 @@ import { prisma } from '@/externals/storage/prisma.storage';
 import { Cart } from './entities';
 
 export async function createCart(): Promise<Cart> {
-  const cartId = randomUUID();
-  await prisma.cart.create({
-    data: {
-      cart_id: cartId,
-    },
+  return prisma.$transaction(async (tx) => {
+    const cartId = randomUUID();
+    await tx.cart.create({
+      data: {
+        cart_id: cartId,
+      },
+    });
+    cookies().set(CART_STORAGE_KEY, cartId, {
+      httpOnly: true,
+      sameSite: 'lax',
+      maxAge: 1000 * 60 * 60 * 24 * 90, // 90 days
+    });
+    const cart = Cart.create(cartId, null);
+    return cart;
   });
-  // await prisma.cart.create({
-  //   data: {
-  //     cart_id: cartId,
-  //     items: {
-  //       create: {
-  //         quantity,
-  //         product_id: productId,
-  //       },
-  //     },
-  //   },
-  // });
-  // await prisma.cartItem.create({
-  //   data: {
-  //     quantity,
-  //     cart_id: cartId,
-  //     product_id: productId,
-  //   },
-  // });
-  cookies().set(CART_STORAGE_KEY, cartId);
-  const cart = Cart.create(cartId, null);
-  return cart;
 }
 
 export async function getCart(): Promise<Cart | null> {
   const cartKey = cookies().get(CART_STORAGE_KEY)?.value;
   if (!cartKey) return null;
-  const foundCart = await prisma.cart.findUnique({
-    where: {
-      cart_id: cartKey,
-    },
-    include: {
-      items: {
-        include: {
-          product: true,
-        },
-        orderBy: {
-          product: {
-            quantity_available: 'asc',
+  return prisma.$transaction(async (tx) => {
+    const foundCart = await tx.cart.findUnique({
+      where: {
+        cart_id: cartKey,
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+          orderBy: {
+            product: {
+              quantity_available: 'asc',
+            },
           },
         },
       },
-    },
+    });
+    if (!foundCart) return null;
+    const cart = Cart.create(foundCart.cart_id, foundCart.user_id);
+    foundCart.items.map((item) => {
+      cart.addItem(
+        item.item_id,
+        item.quantity,
+        item.product_id,
+        item.product.name,
+        item.product.slug,
+        item.product.price,
+        item.product.image_url,
+        item.product.quantity_available
+      );
+    });
+    return cart;
   });
-  if (!foundCart) return null;
-  const cart = Cart.create(foundCart.cart_id, foundCart.user_id);
-  const cartItems = foundCart.items.map((item) => {
-    return {
-      item_id: item.item_id,
-      quantity: item.quantity,
-      product_id: item.product_id,
-      name: item.product.name,
-      slug: item.product.slug,
-      price: item.product.price,
-      image_url: item.product.image_url,
-      quantity_available: item.product.quantity_available,
-    };
-  });
-  cart.setItems(cartItems);
-  return cart;
 }
