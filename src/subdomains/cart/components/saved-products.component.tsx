@@ -1,9 +1,8 @@
-import type { TCartItem } from '@shared/modules/types/cart.type';
-
 import { CartProduct } from './cart-product.component';
+import { CartItem } from '../entities';
 
 interface SavedProductsProps {
-  products: TCartItem[];
+  products: CartItem[];
 }
 
 export function SavedProducts({ products }: SavedProductsProps) {
@@ -12,12 +11,12 @@ export function SavedProducts({ products }: SavedProductsProps) {
       <CartProduct
         key={product.product_id}
         productId={product.product_id}
-        productSlug={product.product_slug}
-        productUrl={product.product_url}
-        productTitle={product.product_title}
-        productQuantity={product.product_quantity}
+        productSlug={product.slug}
+        productUrl={product.image_url}
+        productTitle={product.name}
+        productQuantity={product.quantity}
         quantityAvailable={product.quantity_available}
-        subtotal={product.subtotal}
+        subtotal={product.price}
       />
     );
   });

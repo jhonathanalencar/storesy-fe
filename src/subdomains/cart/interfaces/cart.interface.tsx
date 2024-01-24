@@ -1,12 +1,12 @@
-import type { TShoppingCart } from '@shared/modules/types/cart.type';
 import { formatPrice } from '@shared/modules/utils/format.utils';
 
 import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { SavedProducts } from '../components/saved-products.component';
+import { Cart } from '../entities';
 
 interface CartInterfaceProps {
-  cart: TShoppingCart | null;
+  cart: Cart | null;
 }
 
 export function CartInterface({ cart }: CartInterfaceProps) {
@@ -24,7 +24,9 @@ export function CartInterface({ cart }: CartInterfaceProps) {
               <SavedProducts products={cart.items} />
               <p className="ml-auto w-fit text-lg font-light text-zinc-100">
                 Subtotal:{' '}
-                <span className="font-bold">{formatPrice(cart.subtotal)}</span>
+                <span className="font-bold">
+                  {formatPrice(cart.getSubtotal())}
+                </span>
               </p>
             </>
           ) : (
