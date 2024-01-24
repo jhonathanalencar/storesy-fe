@@ -12,21 +12,25 @@ export class CartItem {
 }
 
 export class Cart {
-  items: CartItem[] = [];
+  items: CartItem[];
 
   constructor(
     readonly cart_id: string,
-    private size: number,
-    private subtotal: number,
     readonly user_id: string | null
-  ) {}
+  ) {
+    this.items = [];
+  }
 
   getSize() {
-    return this.size;
+    return this.items.length;
   }
 
   getSubtotal() {
-    return this.subtotal;
+    let subtotal = 0;
+    for (const item of this.items) {
+      subtotal += item.price * item.quantity;
+    }
+    return subtotal;
   }
 
   addItem(
@@ -54,6 +58,6 @@ export class Cart {
   }
 
   static create(cart_id: string, user_id: string | null) {
-    return new Cart(cart_id, 0, 0, user_id);
+    return new Cart(cart_id, user_id);
   }
 }
