@@ -16,7 +16,10 @@ export function CartInterface({ cart }: CartInterfaceProps) {
         <div className="w-full bg-zinc-600 p-4">
           {cart ? (
             <>
-              <h1 className="text-2xl text-zinc-100">Shopping Cart</h1>
+              <h1 className="text-2xl text-zinc-100">
+                Shopping Cart ({cart.getSize()}{' '}
+                {cart.getSize() > 1 ? 'items' : 'item'})
+              </h1>
               <p className="text-sm font-light tracking-wide text-zinc-300">
                 Deselect all items
               </p>

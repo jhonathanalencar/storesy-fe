@@ -22,7 +22,9 @@ export class Cart {
   }
 
   getSize() {
-    return this.items.length;
+    return this.items.reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
   }
 
   getSubtotal() {
