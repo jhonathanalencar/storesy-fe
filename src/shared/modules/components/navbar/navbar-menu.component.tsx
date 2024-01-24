@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { Menu } from './menu.component';
+import { Menu } from '../menu.component';
 
 export function NavbarMenu() {
   const [activeMenuId, setActiveMenuId] = useState('1');

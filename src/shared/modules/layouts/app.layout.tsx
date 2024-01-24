@@ -1,4 +1,4 @@
-import { Navbar } from '../components/navbar.component';
+import { Navbar } from '../components/navbar/navbar.component';
 
 export function AppLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -3,8 +3,6 @@
 import { useEffect } from 'react';
 import Image from 'next/image';
 
-import { AppLayout } from '@shared/modules/layouts/app.layout';
-
 import serverDown from '@assets/images/undraw-server-down.svg';
 
 export default function Error({
@@ -19,8 +17,8 @@ export default function Error({
   }, [error]);
 
   return (
-    <AppLayout>
-      <section className="container mx-auto grid h-full grid-cols-1 place-content-center gap-2 p-2 md:grid-cols-2 ">
+    <main className="min-h-full bg-storesy-gray-900 text-storesy-gray-200">
+      <section className="container mx-auto grid h-full grid-cols-1 place-content-center gap-2 p-2 md:grid-cols-2">
         <div className="mx-auto w-3/4 sm:w-2/3 md:w-full">
           <Image alt="Server Down" src={serverDown} priority />
         </div>
@@ -39,6 +37,6 @@ export default function Error({
           </button>
         </div>
       </section>
-    </AppLayout>
+    </main>
   );
 }
