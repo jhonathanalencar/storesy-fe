@@ -22,7 +22,10 @@ export function AddToCartButton({ cartProduct }: AddToCartButtonProps) {
       onClick={() => {
         setIsSuccess(false);
         startTransition(async () => {
-          await addProductToCart(cartProduct);
+          await addProductToCart(
+            cartProduct.product_id,
+            cartProduct.product_quantity
+          );
           setIsSuccess(true);
         });
       }}

@@ -1,5 +1,6 @@
 'use client';
 
+import { changeProductQuantity } from '@subdomains/products/actions';
 import { useSelectedQuantity } from '@shared/modules/hooks/use-selected-quantity.hook';
 import { QuantitySelect } from '@subdomains/products/components/quantity-select.component';
 
@@ -24,6 +25,7 @@ export function CartProductActions({
         quantityAvailable={quantityAvailable}
         selectedQuantity={selectedQuantity}
         setSelectedQuantity={setSelectedQuantity}
+        callback={changeProductQuantity}
       />
       <button>delete</button>
     </div>

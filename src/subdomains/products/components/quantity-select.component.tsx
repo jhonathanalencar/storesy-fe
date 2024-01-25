@@ -1,3 +1,5 @@
+import { useTransition } from 'react';
+
 import type { TSelectOption } from '@shared/modules/types/react-select.type';
 
 import { SelectInput } from '@shared/modules/components/select.component';
@@ -7,6 +9,7 @@ interface QuantitySelectProps {
   selectedQuantity: TSelectOption;
   setSelectedQuantity: (value: TSelectOption) => void;
   quantityAvailable: number;
+  callback?: (productId: string, quantity: number) => Promise<void>;
 }
 
 export function QuantitySelect({
@@ -14,7 +17,9 @@ export function QuantitySelect({
   selectedQuantity,
   setSelectedQuantity,
   quantityAvailable,
+  callback,
 }: QuantitySelectProps) {
+  const [isPending, startTransition] = useTransition();
   const options = Array(quantityAvailable)
     .fill(0)
     .map((_, i) => {
@@ -38,7 +43,15 @@ export function QuantitySelect({
         options={options}
         className="w-24"
         value={selectedQuantity}
-        onChange={(option) => setSelectedQuantity(option as TSelectOption)}
+        isDisabled={isPending}
+        onChange={(option) => {
+          if (callback) {
+            startTransition(async () => {
+              await callback(id, Number((option as TSelectOption).value));
+            });
+          }
+          setSelectedQuantity(option as TSelectOption);
+        }}
       />
     </div>
   );

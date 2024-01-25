@@ -2,21 +2,18 @@
 
 import { revalidatePath } from 'next/cache';
 
-import type { TCartItem } from '@shared/modules/types/cart.type';
 import { createCart, getCart } from '../cart/utils';
 import { prisma } from '@/externals/storage/prisma.storage';
 
-export async function addProductToCart(cartProduct: TCartItem) {
+export async function addProductToCart(productId: string, quantity: number) {
   const cart = (await getCart()) ?? (await createCart());
   const existingCartItem = cart.items.find(
-    (item) => item.product_id === cartProduct.product_id
+    (item) => item.product_id === productId
   );
   if (existingCartItem) {
     await prisma.cartItem.update({
       data: {
-        quantity: {
-          increment: cartProduct.product_quantity,
-        },
+        quantity: existingCartItem.quantity + quantity,
       },
       where: {
         item_id: existingCartItem.item_id,
@@ -26,10 +23,30 @@ export async function addProductToCart(cartProduct: TCartItem) {
     await prisma.cartItem.create({
       data: {
         cart_id: cart.cart_id,
-        product_id: cartProduct.product_id,
-        quantity: cartProduct.product_quantity,
+        product_id: productId,
+        quantity: quantity,
       },
     });
   }
+  revalidatePath('/products/[slug]', 'page');
+}
+
+export async function changeProductQuantity(
+  productId: string,
+  quantity: number
+) {
+  const cart = (await getCart()) ?? (await createCart());
+  const existingCartItem = cart.items.find(
+    (item) => item.product_id === productId
+  );
+  if (!existingCartItem) return;
+  await prisma.cartItem.update({
+    data: {
+      quantity,
+    },
+    where: {
+      item_id: existingCartItem.item_id,
+    },
+  });
   revalidatePath('/products/[slug]', 'page');
 }
