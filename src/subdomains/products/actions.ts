@@ -31,6 +31,20 @@ export async function addProductToCart(productId: string, quantity: number) {
   revalidatePath('/products/[slug]', 'page');
 }
 
+export async function removeProductFromCart(productId: string) {
+  const cart = (await getCart()) ?? (await createCart());
+  const existingCartItem = cart.items.find(
+    (item) => item.product_id === productId
+  );
+  if (!existingCartItem) return;
+  await prisma.cartItem.delete({
+    where: {
+      item_id: existingCartItem.item_id,
+    },
+  });
+  revalidatePath('/products/[slug]', 'page');
+}
+
 export async function changeProductQuantity(
   productId: string,
   quantity: number

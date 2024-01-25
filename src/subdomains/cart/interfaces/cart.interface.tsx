@@ -14,7 +14,7 @@ export function CartInterface({ cart }: CartInterfaceProps) {
     <Section>
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-[1fr_auto]">
         <div className="w-full bg-zinc-600 p-4">
-          {cart ? (
+          {cart && cart.getSize() > 0 ? (
             <>
               <h1 className="text-2xl text-zinc-100">
                 Shopping Cart ({cart.getSize()}{' '}
