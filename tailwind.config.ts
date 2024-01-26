@@ -44,10 +44,21 @@ const config: Config = {
           from: { opacity: '0' },
           to: { opacity: '1' },
         },
+        slideDownAndFade: {
+          from: {
+            opacity: '0',
+            transform: 'translateY(-2px)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
       },
       animation: {
         shimmer: 'shimmer 1s ease-in-out infinite forwards',
         'fade-in': 'fade-in 2s ease-in-out',
+        slideDownAndFade: 'slideDownAndFade 400ms ease-in-out',
       },
     },
   },

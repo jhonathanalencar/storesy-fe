@@ -1,9 +1,10 @@
 import { formatPrice } from '@shared/modules/utils/format.utils';
+import { Cart } from '../entities';
 
 import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { SavedProducts } from '../components/saved-products.component';
-import { Cart } from '../entities';
+import { ProceedToCheckout } from '../components/proceed-to-checkout.component';
 
 interface CartInterfaceProps {
   cart: Cart | null;
@@ -38,12 +39,7 @@ export function CartInterface({ cart }: CartInterfaceProps) {
             </p>
           )}
         </div>
-        {cart ? (
-          <div className="row-start-1 h-fit w-fit bg-zinc-600 p-4 shadow-md lg:row-auto">
-            <p>No items selected</p>
-            <button>Proceed to checkout</button>
-          </div>
-        ) : null}
+        {cart && cart.getSize() > 0 ? <ProceedToCheckout /> : null}
       </div>
     </Section>
   );
