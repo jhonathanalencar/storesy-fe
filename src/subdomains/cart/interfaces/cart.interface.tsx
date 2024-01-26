@@ -5,6 +5,7 @@ import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { SavedProducts } from '../components/saved-products.component';
 import { ProceedToCheckout } from '../components/proceed-to-checkout.component';
+import { CartEmpty } from '../components/cart-empty.component';
 
 interface CartInterfaceProps {
   cart: Cart | null;
@@ -15,7 +16,7 @@ export function CartInterface({ cart }: CartInterfaceProps) {
     <Section>
       <div className="grid w-full grid-cols-1 gap-5 lg:grid-cols-[1fr_auto]">
         <div className="w-full bg-zinc-600 p-4">
-          {cart && cart.getSize() > 0 ? (
+          {cart && cart.isEmpty() ? (
             <>
               <h1 className="text-2xl text-zinc-100">
                 Shopping Cart ({cart.getSize()}{' '}
@@ -34,12 +35,10 @@ export function CartInterface({ cart }: CartInterfaceProps) {
               </p>
             </>
           ) : (
-            <p className="text-2xl font-semibold tracking-wide text-zinc-300">
-              Your cart is empty.
-            </p>
+            <CartEmpty />
           )}
         </div>
-        {cart && cart.getSize() > 0 ? <ProceedToCheckout /> : null}
+        {cart && cart.isEmpty() ? <ProceedToCheckout /> : null}
       </div>
     </Section>
   );

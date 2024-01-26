@@ -27,6 +27,10 @@ export class Cart {
     }, 0);
   }
 
+  isEmpty() {
+    return this.getSize() > 0;
+  }
+
   getSubtotal() {
     let subtotal = 0;
     for (const item of this.items) {
