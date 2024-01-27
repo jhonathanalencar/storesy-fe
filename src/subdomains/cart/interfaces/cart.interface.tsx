@@ -38,7 +38,7 @@ export function CartInterface({ cart }: CartInterfaceProps) {
             <CartEmpty />
           )}
         </div>
-        {cart && cart.isEmpty() ? <ProceedToCheckout /> : null}
+        {cart && cart.isEmpty() ? <ProceedToCheckout cart={cart} /> : null}
       </div>
     </Section>
   );

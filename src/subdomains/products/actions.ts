@@ -64,3 +64,20 @@ export async function changeProductQuantity(
   });
   revalidatePath('/products/[slug]', 'page');
 }
+
+export async function selectProductItem(productId: string) {
+  const cart = (await getCart()) ?? (await createCart());
+  const existingCartItem = cart.items.find(
+    (item) => item.product_id === productId
+  );
+  if (!existingCartItem) return;
+  await prisma.cartItem.update({
+    data: {
+      selected: !existingCartItem.selected,
+    },
+    where: {
+      item_id: existingCartItem.item_id,
+    },
+  });
+  revalidatePath('/products/[slug]', 'page');
+}

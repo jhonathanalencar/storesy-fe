@@ -46,8 +46,22 @@ model CartItem {
   product_id String  @db.Uuid
   cart_id    String  @db.Uuid
   quantity   Int
+  selected   Boolean @default(false)
   product    Product @relation(fields: [product_id], references: [product_id], onDelete: Cascade)
   cart       Cart    @relation(fields: [cart_id], references: [cart_id], onDelete: Cascade)
+  Order      Order?  @relation(fields: [order_id], references: [order_id])
+  order_id   String? @db.Uuid
 
   @@map("cart_item")
+}
+
+model Order {
+  order_id   String     @id @default(uuid()) @db.Uuid
+  user_id    String
+  price      Decimal
+  quantity   Int
+  status     String     @default("OPEN")
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  items      CartItem[]
 }

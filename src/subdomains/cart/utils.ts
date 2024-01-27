@@ -59,7 +59,8 @@ export async function getCart(): Promise<Cart | null> {
           item.product.discount_percent
         ),
         item.product.image_url,
-        item.product.quantity_available
+        item.product.quantity_available,
+        item.selected
       );
     });
     return cart;

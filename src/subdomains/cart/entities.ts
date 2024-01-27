@@ -7,7 +7,8 @@ export class CartItem {
     readonly slug: string,
     readonly price: number,
     readonly image_url: string,
-    readonly quantity_available: number
+    readonly quantity_available: number,
+    readonly selected: boolean
   ) {}
 }
 
@@ -39,6 +40,25 @@ export class Cart {
     return subtotal;
   }
 
+  calculateCheckout() {
+    const items = this.getSelectedItems();
+    return items.reduce((acc, val) => acc + val.price * val.quantity, 0);
+  }
+
+  getCheckoutSize() {
+    return this.getSelectedItems().reduce((acc, item) => {
+      return acc + item.quantity;
+    }, 0);
+  }
+
+  hasSelectedItems() {
+    return this.getCheckoutSize() > 0;
+  }
+
+  getSelectedItems() {
+    return this.items.filter((item) => item.selected === true);
+  }
+
   addItem(
     itemId: string,
     quantity: number,
@@ -47,7 +67,8 @@ export class Cart {
     slug: string,
     price: number,
     imageUrl: string,
-    quantityAvailable: number
+    quantityAvailable: number,
+    selected: boolean
   ) {
     this.items.push(
       new CartItem(
@@ -58,7 +79,8 @@ export class Cart {
         slug,
         price,
         imageUrl,
-        quantityAvailable
+        quantityAvailable,
+        selected
       )
     );
   }
