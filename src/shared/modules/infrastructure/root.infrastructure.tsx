@@ -1,4 +1,7 @@
+'use client';
+
 import { ReactNode } from 'react';
+import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'sonner';
 
 import '@assets/styles/globals.css';
@@ -10,7 +13,7 @@ interface RootInfrastructureProps {
 
 export function RootInfrastructure({ children }: RootInfrastructureProps) {
   return (
-    <>
+    <SessionProvider>
       {children}
       <Toaster
         richColors
@@ -22,6 +25,6 @@ export function RootInfrastructure({ children }: RootInfrastructureProps) {
           },
         }}
       />
-    </>
+    </SessionProvider>
   );
 }

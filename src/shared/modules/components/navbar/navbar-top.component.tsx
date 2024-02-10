@@ -1,15 +1,20 @@
 import Link from 'next/link';
-import { MagnifyingGlassIcon, UserIcon } from '@heroicons/react/24/solid';
+import { getServerSession } from 'next-auth';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 import { Cart } from '@subdomains/cart/entities';
+import { authOptions } from '../../configs/auth.config';
 
 import { ShoppingCartButton } from './shopping-cart-button.component';
+import { LoginButton } from './login-button.component';
 
 interface NavbarTopProps {
   cart: Cart | null;
 }
 
-export function NavbarTop({ cart }: NavbarTopProps) {
+export async function NavbarTop({ cart }: NavbarTopProps) {
+  const session = await getServerSession(authOptions);
+
   return (
     <div className="navbar-content-grid mx-auto grid h-16 w-full max-w-5xl items-center gap-2 px-4 py-2">
       <div className="navbar-logo h-full">
@@ -41,13 +46,8 @@ export function NavbarTop({ cart }: NavbarTopProps) {
       </div>
 
       <nav className="navbar-nav flex h-full gap-2">
-        <Link
-          href="/signin"
-          className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-        >
-          <UserIcon className="h-6 w-6 text-green-500" />
-          <span className="self-end text-sm">Sign in</span>
-        </Link>
+        <LoginButton user={session?.user} />
+
         <ShoppingCartButton className="focus-visible:ring-offset-zinc-950">
           <div className="flex flex-col self-end">
             <span className="self-start text-base font-bold text-yellow-500">
