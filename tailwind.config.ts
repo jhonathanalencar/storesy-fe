@@ -43,25 +43,41 @@ const config: Config = {
             'background-position': '400px 0',
           },
         },
-        'fade-in': {
+        fadeIn: {
           from: { opacity: '0' },
           to: { opacity: '1' },
+        },
+        fadeOut: {
+          from: { opacity: '1' },
+          to: { opacity: '0' },
         },
         slideDownAndFade: {
           from: {
             opacity: '0',
-            transform: 'translateY(-2px)',
+            transform: 'translateY(-20%)',
           },
           to: {
             opacity: '1',
             transform: 'translateY(0)',
           },
         },
+        rightSlideIn: {
+          from: { opacity: '0', transform: 'translateX(-100%)' },
+          to: { opacity: '1', transform: 'translateX(0)' },
+        },
+        rightSlideOut: {
+          from: { opacity: '1', transform: 'translateX(0)' },
+          to: { opacity: '0', transform: 'translateX(-100%)' },
+        },
       },
       animation: {
         shimmer: 'shimmer 1s ease-in-out infinite forwards',
-        'fade-in': 'fade-in 2s ease-in-out',
-        slideDownAndFade: 'slideDownAndFade 400ms ease-in-out',
+        fade: 'fadeIn 400ms ease-in-out',
+        'fade-out': 'fadeOut 400ms ease-in-out',
+        'fade-in': 'fadeIn 2s ease-in-out',
+        'slide-down-and-fade': 'slideDownAndFade 400ms ease-in-out',
+        'right-slide-in': 'rightSlideIn 400ms ease-in-out',
+        'right-slide-out': 'rightSlideOut 400ms ease-in-out',
       },
     },
   },

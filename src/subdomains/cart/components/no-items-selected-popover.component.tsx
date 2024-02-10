@@ -14,7 +14,7 @@ export function NoItemsSelectedPopover() {
         <Popover.Content
           sideOffset={5}
           collisionPadding={5}
-          className="flex animate-slideDownAndFade rounded bg-white px-2 py-2 shadow-lg"
+          className="data-[state=open]:animate-slide-down-and-fade data-[state=closed]:animate-fade-out flex rounded bg-white px-2 py-2 shadow-lg"
         >
           <span className="text-sm text-black">
             Please select at least one item
