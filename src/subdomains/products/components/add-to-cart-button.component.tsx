@@ -1,4 +1,6 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useTransition } from 'react';
+import { toast } from 'sonner';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 
 import type { TCartItem } from '@shared/modules/types/cart.type';
 import { addProductToCart } from '../actions';
@@ -9,24 +11,18 @@ interface AddToCartButtonProps {
 
 export function AddToCartButton({ cartProduct }: AddToCartButtonProps) {
   const [isPending, startTransition] = useTransition();
-  const [isSuccess, setIsSuccess] = useState(false);
-
-  useEffect(() => {
-    if (isSuccess === true) {
-      alert('Added to cart');
-    }
-  }, [isSuccess]);
 
   return (
     <button
       onClick={() => {
-        setIsSuccess(false);
         startTransition(async () => {
           await addProductToCart(
             cartProduct.product_id,
             cartProduct.product_quantity
           );
-          setIsSuccess(true);
+          toast('Added to cart', {
+            icon: <CheckCircleIcon className="h-6 w-6 text-green-500" />,
+          });
         });
       }}
       disabled={isPending}

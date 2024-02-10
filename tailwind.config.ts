@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-merriweather)', 'sans-serif'],
+      },
       colors: {
         storesy: {
           gray: {

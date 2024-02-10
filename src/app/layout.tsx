@@ -3,7 +3,10 @@ import { Merriweather_Sans } from 'next/font/google';
 
 import { RootInfrastructure } from '@shared/modules/infrastructure/root.infrastructure';
 
-const merriweather_sans = Merriweather_Sans({ subsets: ['latin'] });
+const merriweather_sans = Merriweather_Sans({
+  subsets: ['latin'],
+  variable: '--font-merriweather',
+});
 
 export const metadata: Metadata = {
   title: 'Storesy',
@@ -18,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="h-full">
-      <body className={`${merriweather_sans.className} h-full`}>
+      <body className={`${merriweather_sans.className} h-full antialiased`}>
         <RootInfrastructure>{children}</RootInfrastructure>
       </body>
     </html>

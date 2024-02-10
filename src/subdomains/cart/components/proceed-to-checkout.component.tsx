@@ -14,12 +14,15 @@ export function ProceedToCheckout({ cart }: ProceedToCheckoutProps) {
         {cart.hasSelectedItems() ? (
           <div className="flex flex-col gap-2">
             <p className="text-lg font-light text-zinc-200">
-              Subtotal ({cart.getCheckoutSize()}{' '}
-              {cart.getCheckoutSize() > 1 ? 'items' : 'item'}):{' '}
+              Subtotal:{' '}
               <span className="font-bold">
                 {formatPrice(cart.calculateCheckout())}
               </span>
             </p>
+            <span className="text-lg font-normal text-gray-300">
+              {cart.getCheckoutSize()}{' '}
+              {cart.getCheckoutSize() > 1 ? 'items' : 'item'}
+            </span>
             <button className="mx-auto w-52 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-600">
               Proceed to checkout
             </button>
