@@ -61,6 +61,16 @@ const config: Config = {
             transform: 'translateY(0)',
           },
         },
+        slideUpAndFade: {
+          from: {
+            opacity: '0',
+            transform: 'translateY(10%)',
+          },
+          to: {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
         rightSlideIn: {
           from: { opacity: '0', transform: 'translateX(-100%)' },
           to: { opacity: '1', transform: 'translateX(0)' },
@@ -76,6 +86,7 @@ const config: Config = {
         'fade-out': 'fadeOut 400ms ease-in-out',
         'fade-in': 'fadeIn 2s ease-in-out',
         'slide-down-and-fade': 'slideDownAndFade 400ms ease-in-out',
+        'slide-up-and-fade': 'slideUpAndFade 400ms ease-in-out',
         'right-slide-in': 'rightSlideIn 400ms ease-in-out',
         'right-slide-out': 'rightSlideOut 400ms ease-in-out',
       },

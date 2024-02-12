@@ -26,7 +26,7 @@ export function UserMenu({ user }: UserMenuProps) {
         </button>
       </DropdownMenu.Trigger>
       <DropdownMenu.Portal>
-        <DropdownMenu.Content className="min-w-[220px] rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow">
+        <DropdownMenu.Content className="data-[side=bottom]:animate-slide-up-and-fade min-w-[220px] rounded-md border border-gray-700 bg-gray-800 text-gray-100 shadow">
           <div className="flex max-w-[280px] gap-2 p-2">
             <Avatar.Root className="h-12 w-12  select-none overflow-hidden rounded-full">
               <Avatar.Image
