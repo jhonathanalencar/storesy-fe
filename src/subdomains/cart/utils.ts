@@ -1,36 +1,51 @@
 import { cookies } from 'next/headers';
 import { randomUUID } from 'node:crypto';
+import { getServerSession } from 'next-auth';
 
 import { CART_STORAGE_KEY } from '@shared/modules/constants/storage.constant';
-import { prisma } from '@/externals/storage/prisma.storage';
+import { prisma } from '@externals/storage/prisma.storage';
 import { Cart } from './entities';
 import { calculateProductDiscount } from '@shared/modules/utils/format.utils';
+import { authOptions } from '@shared/modules/configs/auth.config';
+import type { FoundCart } from './types';
 
 export async function createCart(): Promise<Cart> {
-  return prisma.$transaction(async (tx) => {
-    const cartId = randomUUID();
-    await tx.cart.create({
+  const session = await getServerSession(authOptions);
+  const cartId = randomUUID();
+  let cart: Cart;
+  if (session) {
+    const userId = session.user.id;
+    await prisma.cart.create({
+      data: {
+        cart_id: cartId,
+        user_id: userId,
+      },
+    });
+    cart = Cart.create(cartId, userId);
+  } else {
+    await prisma.cart.create({
       data: {
         cart_id: cartId,
       },
     });
     cookies().set(CART_STORAGE_KEY, cartId, {
       httpOnly: true,
+      secure: true,
       sameSite: 'lax',
-      maxAge: 1000 * 60 * 60 * 24 * 90, // 90 days
+      maxAge: 60 * 60 * 24 * 90, // 90 days
     });
-    const cart = Cart.create(cartId, null);
-    return cart;
-  });
+    cart = Cart.create(cartId, null);
+  }
+  return cart;
 }
 
 export async function getCart(): Promise<Cart | null> {
-  const cartKey = cookies().get(CART_STORAGE_KEY)?.value;
-  if (!cartKey) return null;
-  return prisma.$transaction(async (tx) => {
-    const foundCart = await tx.cart.findUnique({
+  const session = await getServerSession(authOptions);
+  let foundCart: FoundCart | null;
+  if (session) {
+    foundCart = await prisma.cart.findUnique({
       where: {
-        cart_id: cartKey,
+        user_id: session.user.id,
       },
       include: {
         items: {
@@ -45,24 +60,44 @@ export async function getCart(): Promise<Cart | null> {
         },
       },
     });
-    if (!foundCart) return null;
-    const cart = Cart.create(foundCart.cart_id, foundCart.user_id);
-    foundCart.items.map((item) => {
-      cart.addItem(
-        item.item_id,
-        item.quantity,
-        item.product_id,
-        item.product.name,
-        item.product.slug,
-        calculateProductDiscount(
-          item.product.price,
-          item.product.discount_percent
-        ),
-        item.product.image_url,
-        item.product.quantity_available,
-        item.selected
-      );
+  } else {
+    const cartkey = cookies().get(CART_STORAGE_KEY)?.value;
+    if (!cartkey) return null;
+    foundCart = await prisma.cart.findUnique({
+      where: {
+        cart_id: cartkey,
+      },
+      include: {
+        items: {
+          include: {
+            product: true,
+          },
+          orderBy: {
+            product: {
+              quantity_available: 'asc',
+            },
+          },
+        },
+      },
     });
-    return cart;
+  }
+  if (!foundCart) return null;
+  const cart = Cart.create(foundCart.cart_id, foundCart.user_id);
+  foundCart.items.map((item) => {
+    cart.addItem(
+      item.item_id,
+      item.quantity,
+      item.product_id,
+      item.product.name,
+      item.product.slug,
+      calculateProductDiscount(
+        item.product.price,
+        item.product.discount_percent
+      ),
+      item.product.image_url,
+      item.product.quantity_available,
+      item.selected
+    );
   });
+  return cart;
 }
