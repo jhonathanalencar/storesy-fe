@@ -8,6 +8,7 @@ import { Cart } from './entities';
 import { calculateProductDiscount } from '@shared/modules/utils/format.utils';
 import { authOptions } from '@shared/modules/configs/auth.config';
 import type { FoundCart } from './types';
+import { CartItem } from '@prisma/client';
 
 export async function createCart(): Promise<Cart> {
   const session = await getServerSession(authOptions);
@@ -100,4 +101,67 @@ export async function getCart(): Promise<Cart | null> {
     );
   });
   return cart;
+}
+
+export async function mergeAnonymousCartIntoUserCart(userId: string) {
+  const cartkey = cookies().get(CART_STORAGE_KEY)?.value;
+  if (!cartkey) return;
+  const localCart = await prisma.cart.findUnique({
+    where: {
+      cart_id: cartkey,
+    },
+    include: {
+      items: true,
+    },
+  });
+  if (!localCart) return;
+  const userCart = await prisma.cart.findUnique({
+    where: {
+      user_id: userId,
+    },
+    include: {
+      items: true,
+    },
+  });
+  if (!userCart) return;
+  await prisma.$transaction(async (tx) => {
+    const mergedCartItems = mergeCartItems(localCart.items, userCart.items);
+    await tx.cartItem.deleteMany({
+      where: { cart_id: userCart.cart_id },
+    });
+    await tx.cart.update({
+      where: { cart_id: userCart.cart_id },
+      data: {
+        items: {
+          createMany: {
+            data: mergedCartItems.map((item) => {
+              return {
+                product_id: item.product_id,
+                quantity: item.quantity,
+                selected: item.selected,
+              };
+            }),
+          },
+        },
+      },
+    });
+    await tx.cart.delete({
+      where: { cart_id: localCart.cart_id },
+    });
+    cookies().delete(CART_STORAGE_KEY);
+  });
+}
+
+function mergeCartItems(...cartItems: CartItem[][]) {
+  return cartItems.reduce((acc, items) => {
+    items.forEach((item) => {
+      const existingItem = acc.find((i) => i.product_id === item.product_id);
+      if (existingItem) {
+        existingItem.quantity += item.quantity;
+      } else {
+        acc.push(item);
+      }
+    });
+    return acc;
+  }, [] as CartItem[]);
 }
