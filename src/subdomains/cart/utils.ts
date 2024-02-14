@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers';
 import { randomUUID } from 'node:crypto';
 import { getServerSession } from 'next-auth';
+import type { CartItem, Prisma } from '@prisma/client';
 
 import { CART_STORAGE_KEY } from '@shared/modules/constants/storage.constant';
 import { prisma } from '@externals/storage/prisma.storage';
@@ -8,7 +9,6 @@ import { Cart } from './entities';
 import { calculateProductDiscount } from '@shared/modules/utils/format.utils';
 import { authOptions } from '@shared/modules/configs/auth.config';
 import type { FoundCart } from './types';
-import { CartItem } from '@prisma/client';
 
 export async function createCart(): Promise<Cart> {
   const session = await getServerSession(authOptions);
@@ -40,46 +40,38 @@ export async function createCart(): Promise<Cart> {
   return cart;
 }
 
+export async function findCart(
+  where: Prisma.CartWhereUniqueInput
+): Promise<FoundCart | null> {
+  return prisma.cart.findUnique({
+    where,
+    include: {
+      items: {
+        include: {
+          product: true,
+        },
+        orderBy: {
+          product: {
+            quantity_available: 'asc',
+          },
+        },
+      },
+    },
+  });
+}
+
 export async function getCart(): Promise<Cart | null> {
   const session = await getServerSession(authOptions);
   let foundCart: FoundCart | null;
   if (session) {
-    foundCart = await prisma.cart.findUnique({
-      where: {
-        user_id: session.user.id,
-      },
-      include: {
-        items: {
-          include: {
-            product: true,
-          },
-          orderBy: {
-            product: {
-              quantity_available: 'asc',
-            },
-          },
-        },
-      },
+    foundCart = await findCart({
+      user_id: session.user.id,
     });
   } else {
     const cartkey = cookies().get(CART_STORAGE_KEY)?.value;
     if (!cartkey) return null;
-    foundCart = await prisma.cart.findUnique({
-      where: {
-        cart_id: cartkey,
-      },
-      include: {
-        items: {
-          include: {
-            product: true,
-          },
-          orderBy: {
-            product: {
-              quantity_available: 'asc',
-            },
-          },
-        },
-      },
+    foundCart = await findCart({
+      cart_id: cartkey,
     });
   }
   if (!foundCart) return null;
@@ -103,7 +95,9 @@ export async function getCart(): Promise<Cart | null> {
   return cart;
 }
 
-export async function mergeAnonymousCartIntoUserCart(userId: string) {
+export async function mergeAnonymousCartIntoUserCart(
+  userId: string
+): Promise<void> {
   const cartkey = cookies().get(CART_STORAGE_KEY)?.value;
   if (!cartkey) return;
   const localCart = await prisma.cart.findUnique({
@@ -152,7 +146,7 @@ export async function mergeAnonymousCartIntoUserCart(userId: string) {
   });
 }
 
-function mergeCartItems(...cartItems: CartItem[][]) {
+function mergeCartItems(...cartItems: CartItem[][]): CartItem[] {
   return cartItems.reduce((acc, items) => {
     items.forEach((item) => {
       const existingItem = acc.find((i) => i.product_id === item.product_id);
