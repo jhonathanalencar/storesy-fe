@@ -109,7 +109,7 @@ export async function mergeAnonymousCartIntoUserCart(
     },
   });
   if (!localCart) return;
-  const userCart = await prisma.cart.findUnique({
+  let userCart = await prisma.cart.findUnique({
     where: {
       user_id: userId,
     },
@@ -117,14 +117,23 @@ export async function mergeAnonymousCartIntoUserCart(
       items: true,
     },
   });
-  if (!userCart) return;
+  if (!userCart) {
+    userCart = await prisma.cart.create({
+      data: {
+        user_id: userId,
+      },
+      include: {
+        items: true,
+      },
+    });
+  }
   await prisma.$transaction(async (tx) => {
-    const mergedCartItems = mergeCartItems(localCart.items, userCart.items);
+    const mergedCartItems = mergeCartItems(localCart.items, userCart!.items);
     await tx.cartItem.deleteMany({
-      where: { cart_id: userCart.cart_id },
+      where: { cart_id: userCart!.cart_id },
     });
     await tx.cart.update({
-      where: { cart_id: userCart.cart_id },
+      where: { cart_id: userCart!.cart_id },
       data: {
         items: {
           createMany: {
