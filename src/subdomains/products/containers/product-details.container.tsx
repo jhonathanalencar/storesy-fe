@@ -10,7 +10,8 @@ interface ProductDetailsContainerProps {
 export async function ProductDetailsContainer({
   params,
 }: ProductDetailsContainerProps) {
-  const [product] = await getProductBySlug(params.slug);
+  const product = await getProductBySlug(params.slug);
+
   return (
     <AppLayout>
       <ProductDetailsInterface product={product} />

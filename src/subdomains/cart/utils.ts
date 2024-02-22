@@ -52,7 +52,7 @@ export async function findCart(
         },
         orderBy: {
           product: {
-            quantity_available: 'asc',
+            quantity: 'asc',
           },
         },
       },
@@ -84,11 +84,11 @@ export async function getCart(): Promise<Cart | null> {
       item.product.name,
       item.product.slug,
       calculateProductDiscount(
-        item.product.price,
-        item.product.discount_percent
+        Number(item.product.price),
+        Number(item.product.discount?.discount_percent ?? 0)
       ),
       item.product.image_url,
-      item.product.quantity_available,
+      item.product.quantity,
       item.selected
     );
   });

@@ -13,7 +13,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="flex w-fit animate-fade-in flex-col gap-1 rounded bg-zinc-800 p-2 shadow-xl shadow-zinc-900">
         <div className="h-56 w-48 animate-shimmer bg-shimmer">
           <Image
-            src={product.image_url}
+            src={product.imageUrl}
             alt={product.name}
             width="0"
             height="0"

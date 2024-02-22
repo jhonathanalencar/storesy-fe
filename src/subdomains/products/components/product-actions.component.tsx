@@ -21,23 +21,23 @@ export function ProductActions({ product, price }: ProductActions) {
       <span className="text-lg font-black tracking-tight text-zinc-200">
         {formatPrice(price)}
       </span>
-      <ProductAvailability quantity_available={product.quantity_available} />
+      <ProductAvailability quantity_available={product.quantity} />
       <QuantitySelect
-        id={product.product_id}
+        id={product.productId}
         selectedQuantity={selectedQuantity}
         setSelectedQuantity={setSelectedQuantity}
-        quantityAvailable={product.quantity_available}
+        quantityAvailable={product.quantity}
       />
       <div className="mb-2 mt-4 flex flex-col gap-2">
         <AddToCartButton
           cartProduct={{
-            product_id: product.product_id,
+            product_id: product.productId,
             product_slug: product.slug,
             subtotal: price,
-            product_url: product.image_url,
+            product_url: product.imageUrl,
             product_title: product.name,
             product_quantity: Number(selectedQuantity.value),
-            quantity_available: product.quantity_available,
+            quantity_available: product.quantity,
           }}
         />
         <button className="mx-auto w-4/5 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 md:w-52">

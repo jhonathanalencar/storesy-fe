@@ -11,7 +11,7 @@ export function ProductRating({ ratings }: ProductRatingProps) {
 
   if (ratings.length > 0) {
     const totalRate = ratings.reduce((acc, val) => {
-      return acc + val.rate;
+      return acc + val.score;
     }, 0);
     averageCustomerReviews = totalRate / ratings.length;
   }

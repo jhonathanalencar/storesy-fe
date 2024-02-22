@@ -5,7 +5,7 @@ export function calculateRatingPercentage(
   starAmount: string
 ) {
   const reviewsByStarAmount = ratings.filter((rating) =>
-    rating.rate.toString().startsWith(starAmount)
+    rating.score.toString().startsWith(starAmount)
   ).length;
 
   return (reviewsByStarAmount ?? 0 / ratings.length) * 100;

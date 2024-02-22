@@ -13,7 +13,7 @@ interface ProductSliderProps {
 export function ProductSlider({ products }: ProductSliderProps) {
   const content = products.map((product) => {
     return (
-      <Slider.Slide key={product.product_id}>
+      <Slider.Slide key={product.productId}>
         <ProductCard product={product} />
       </Slider.Slide>
     );

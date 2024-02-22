@@ -16,8 +16,8 @@ interface ProductDetailsInterfaceProps {
 export function ProductDetailsInterface({
   product,
 }: ProductDetailsInterfaceProps) {
-  const discount = (product.price / 100) * product.discount_percent;
-  const price = product.price / 100 - discount;
+  const discount = product.price * (product.discountPercent / 100);
+  const price = product.price - discount;
 
   return (
     <Section className="max-w-xl md:max-w-6xl">
@@ -25,7 +25,7 @@ export function ProductDetailsInterface({
         <div className="product-image">
           <Image
             alt={product.name}
-            src={product.image_url}
+            src={product.imageUrl}
             width="0"
             height="0"
             sizes="100vw"
@@ -42,16 +42,16 @@ export function ProductDetailsInterface({
 
           <Separator />
 
-          {product.is_deal ? (
+          {product.active ? (
             <span className="w-fit rounded bg-red-700 px-3 py-1 text-zinc-100">
               Deal
             </span>
           ) : null}
 
           <ProductPrice
-            isDeal={product.is_deal}
+            isDeal={product.active}
             productPrice={product.price}
-            discountPercent={product.discount_percent}
+            discountPercent={product.discountPercent}
           />
 
           <Separator />

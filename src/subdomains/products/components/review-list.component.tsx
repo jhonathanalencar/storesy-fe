@@ -11,7 +11,7 @@ export function ReviewList({ ratings }: ReviewListProps) {
   const content =
     ratings.length > 0 ? (
       ratings.map((rating) => {
-        return <Review key={rating.rate_id} rating={rating} />;
+        return <Review key={rating.rateId} rating={rating} />;
       })
     ) : (
       <div className="flex flex-col items-center gap-2">

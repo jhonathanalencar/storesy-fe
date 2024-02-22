@@ -4,11 +4,15 @@ export type FoundCart = Prisma.CartGetPayload<{
   include: {
     items: {
       include: {
-        product: true;
+        product: {
+          include: {
+            discount: true;
+          };
+        };
       };
       orderBy: {
         product: {
-          quantity_available: 'asc';
+          quantity: 'asc';
         };
       };
     };
