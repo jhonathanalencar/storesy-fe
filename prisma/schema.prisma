@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,23 +8,63 @@ datasource db {
 }
 
 model Product {
-  product_id         String     @id @default(uuid()) @db.Uuid
-  slug               String     @unique
-  name               String
-  description        String
-  summary            String
-  image_url          String
-  categories         String[]
-  price              Int
-  quantity_available Int
-  is_deal            Boolean    @default(false)
-  discount_percent   Float      @default(0)
-  created_at         DateTime   @default(now())
-  updated_at         DateTime   @updatedAt
-  released_date      DateTime?
-  CartItem           CartItem[]
+  product_id       String             @id @default(uuid()) @db.Uuid
+  name             String
+  slug             String             @unique
+  description      String
+  summary          String             @db.VarChar(103)
+  price            Decimal            @db.Decimal
+  image_url        String
+  discount_id      String?            @db.Uuid
+  quantity         Decimal?           @default(0) @db.Decimal
+  created_at       DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?          @default(now()) @updatedAt @db.Timestamp(6)
+  released_date    DateTime?          @db.Timestamp(6)
+  discount         discount?          @relation(fields: [discount_id], references: [discount_id], onDelete: Cascade, onUpdate: NoAction)
+  product_category product_category[]
+  product_rate     product_rate[]
+  cart_items       CartItem[]
 
   @@map("product")
+}
+
+model category {
+  category_id      String             @id @db.Uuid
+  name             String
+  slug             String             @unique
+  created_at       DateTime?          @default(now()) @db.Timestamp(6)
+  updated_at       DateTime?          @default(now()) @db.Timestamp(6)
+  product_category product_category[]
+}
+
+model discount {
+  discount_id      String    @id @db.Uuid
+  discount_percent Decimal?  @default(0) @db.Decimal
+  active           Boolean?  @default(false)
+  created_at       DateTime? @default(now()) @db.Timestamp(6)
+  updated_at       DateTime? @default(now()) @db.Timestamp(6)
+  product          Product[]
+}
+
+model product_category {
+  product_category_id Int       @id @default(autoincrement())
+  product_id          String?   @db.Uuid
+  category_id         String?   @db.Uuid
+  category            category? @relation(fields: [category_id], references: [category_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_category")
+  product             Product?  @relation(fields: [product_id], references: [product_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_product")
+}
+
+model product_rate {
+  product_rate_id String    @id @db.Uuid
+  user_id         String    @db.Uuid
+  product_id      String?   @db.Uuid
+  score           Int
+  description     String
+  created_at      DateTime? @default(now()) @db.Timestamp(6)
+  updated_at      DateTime? @default(now()) @db.Timestamp(6)
+  product         Product?  @relation(fields: [product_id], references: [product_id], onDelete: Cascade, onUpdate: NoAction, map: "fk_product")
+
+  @@unique([product_id, user_id], map: "product_user")
 }
 
 model Cart {
