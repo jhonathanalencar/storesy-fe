@@ -5,37 +5,31 @@ import { RecommendationBox } from '../components/recommendation-box.component';
 import { Section } from '@shared/modules/components/section.component';
 
 interface RecommendationsInterfaceProps {
-  products: TProduct[];
+  deals: TProduct[];
+  gamingProducts: TProduct[];
+  newArrivals: TProduct[];
+  bestSellers: TProduct[];
 }
 
 export function RecommendationsInterface({
-  products,
+  deals,
+  gamingProducts,
+  newArrivals,
+  bestSellers,
 }: RecommendationsInterfaceProps) {
   return (
     <Section>
       <RecommendationBox title="Deals">
-        <ProductSlider products={products} />
+        <ProductSlider products={deals} />
       </RecommendationBox>
       <RecommendationBox title="Gaming accessories">
-        <ul>
-          {products.map((product) => {
-            return <li key={product.product_id}>{product.name}</li>;
-          })}
-        </ul>
+        <ProductSlider products={gamingProducts} />
       </RecommendationBox>
       <RecommendationBox title="New arrivals">
-        <ul>
-          {products.map((product) => {
-            return <li key={product.product_id}>{product.name}</li>;
-          })}
-        </ul>
+        <ProductSlider products={newArrivals} />
       </RecommendationBox>
       <RecommendationBox title="Best sellers">
-        <ul>
-          {products.map((product) => {
-            return <li key={product.product_id}>{product.name}</li>;
-          })}
-        </ul>
+        <ProductSlider products={bestSellers} />
       </RecommendationBox>
     </Section>
   );
