@@ -13,9 +13,7 @@ export async function RecommendationsContainer() {
     getProductDeals(),
     getProductsByCategory('video-games'),
     getNewArrivals(),
-    getBestSellers(
-      '7ddfb3ef-ec05-4f8c-8097-6d460deaf853,6abe914d-31ae-4a77-b2da-c1333402aaa0'
-    ),
+    getBestSellers('0', '9'),
   ]);
 
   return (

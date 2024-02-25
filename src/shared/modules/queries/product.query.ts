@@ -31,9 +31,12 @@ export async function getNewArrivals(): Promise<TProduct[]> {
   return response.json();
 }
 
-export async function getBestSellers(productIds: string): Promise<TProduct[]> {
+export async function getBestSellers(
+  start: string,
+  stop: string
+): Promise<TProduct[]> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/best-sellers?productIds=${productIds}`
+    `${process.env.CATALOG_API_URL}/best-sellers?start=${start}&stop=${stop}`
   );
   return response.json();
 }
