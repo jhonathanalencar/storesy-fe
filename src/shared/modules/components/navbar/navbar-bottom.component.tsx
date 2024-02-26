@@ -2,20 +2,22 @@ import Link from 'next/link';
 import { UserIcon } from '@heroicons/react/24/solid';
 
 import { Cart } from '@subdomains/cart/entities';
+import type { TCategory } from '../../types/category.type';
 
 import { MenuButton } from './menu-button.component';
 import { ShoppingCartButton } from './shopping-cart-button.component';
 
 interface NavbarBottomProps {
   cart: Cart | null;
+  categories: TCategory[];
 }
 
-export function NavbarBottom({ cart }: NavbarBottomProps) {
+export function NavbarBottom({ cart, categories }: NavbarBottomProps) {
   return (
     <div className="w-full bg-zinc-700 px-4 py-1">
       <div className="mx-auto flex w-full max-w-5xl items-stretch gap-2">
         <div className="flex h-full w-fit rounded-sm outline-1 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-700 hover:outline">
-          <MenuButton />
+          <MenuButton categories={categories} />
         </div>
         <div className="w-fit sm:hidden">
           <Link

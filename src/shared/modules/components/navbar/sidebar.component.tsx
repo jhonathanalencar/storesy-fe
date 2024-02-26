@@ -2,9 +2,15 @@ import { signIn, useSession } from 'next-auth/react';
 import * as Dialog from '@radix-ui/react-dialog';
 import { XMarkIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
+import type { TCategory } from '../../types/category.type';
+
 import { NavbarMenu } from './navbar-menu.component';
 
-export function Sidebar() {
+interface SidebarProps {
+  categories: TCategory[];
+}
+
+export function Sidebar({ categories }: SidebarProps) {
   const { data } = useSession();
 
   function handleLogin() {
@@ -32,7 +38,7 @@ export function Sidebar() {
             <XMarkIcon className="h-8 w-8 text-green-500" />
           </Dialog.Close>
         </div>
-        <NavbarMenu />
+        <NavbarMenu categories={categories} />
       </Dialog.Content>
     </Dialog.Portal>
   );

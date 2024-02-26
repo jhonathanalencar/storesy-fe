@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getServerSession } from 'next-auth';
+import { type Session, getServerSession } from 'next-auth';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 import { Cart } from '@subdomains/cart/entities';
@@ -46,7 +46,7 @@ export async function NavbarTop({ cart }: NavbarTopProps) {
       </div>
 
       <nav className="navbar-nav flex h-full gap-2">
-        <LoginButton user={session?.user} />
+        <LoginButton user={session?.user as Session['user']} />
 
         <ShoppingCartButton className="focus-visible:ring-offset-zinc-950">
           <div className="flex flex-col self-end">

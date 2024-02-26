@@ -27,7 +27,7 @@ function MenuMain({ activeMenuId, children, className = '' }: MenuMainProps) {
     <ul
       data-menu-id="1"
       className={twMerge(
-        'absolute left-0 top-12 h-full w-full transition-transform duration-200',
+        'absolute left-0 top-12 h-full w-full transition-transform duration-300',
         className,
         activeMenuId === '1'
           ? 'visible translate-x-0'
@@ -56,7 +56,7 @@ function MenuSubmenu({
     <ul
       data-menu-id={menuId}
       className={twMerge(
-        'absolute left-0 top-12 h-full w-full transition-transform duration-200',
+        'absolute left-0 top-12 h-full w-full transition-transform duration-300',
         className,
         activeMenuId === menuId
           ? 'visible translate-x-0'
