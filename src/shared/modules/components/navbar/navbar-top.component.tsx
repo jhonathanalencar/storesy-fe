@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { type Session, getServerSession } from 'next-auth';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 import { Cart } from '@subdomains/cart/entities';
 import { authOptions } from '../../configs/auth.config';
 
 import { ShoppingCartButton } from './shopping-cart-button.component';
 import { LoginButton } from './login-button.component';
+import { SearchBar } from './search-bar.component';
 
 interface NavbarTopProps {
   cart: Cart | null;
@@ -29,20 +29,7 @@ export async function NavbarTop({ cart }: NavbarTopProps) {
       </div>
 
       <div className="navbar-search h-full">
-        <form className="ml-auto flex h-full w-fit rounded bg-zinc-800 focus-within:ring-2 focus-within:ring-green-500 focus-within:ring-offset-2 focus-within:ring-offset-zinc-950 sm:ml-0 sm:w-full">
-          <input
-            id="search"
-            type="text"
-            placeholder="Search"
-            className="hidden h-full w-full bg-transparent p-2 text-zinc-400 outline-none sm:block"
-          />
-          <button
-            type="submit"
-            className="flex w-12 items-center justify-center rounded bg-green-500 transition-colors hover:bg-green-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 sm:rounded-bl-none sm:rounded-br sm:rounded-tl-none sm:rounded-tr"
-          >
-            <MagnifyingGlassIcon className="h-6 w-6 text-zinc-900" />
-          </button>
-        </form>
+        <SearchBar />
       </div>
 
       <nav className="navbar-nav flex h-full gap-2">
