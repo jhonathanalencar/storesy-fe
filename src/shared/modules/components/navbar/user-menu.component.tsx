@@ -21,7 +21,7 @@ export function UserMenu({ user }: UserMenuProps) {
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
         <button className="inline-flex h-full items-center rounded-sm px-2 text-lg text-zinc-200 outline-1 hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950">
-          <span className=" text-xs">Hello, {user?.name?.split(' ')[0]}</span>
+          <span className="text-xs">Hello, {user?.name?.split(' ')[0]}</span>
           <ChevronDownIcon className="h-5 w-5 text-zinc-200" />
         </button>
       </DropdownMenu.Trigger>
