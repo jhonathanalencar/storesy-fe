@@ -40,3 +40,12 @@ export async function getBestSellers(
   );
   return response.json();
 }
+
+export async function searchProducts(
+  query: string
+): Promise<(TProduct & { rateAmount: number; totalScore: number })[]> {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/search?query=${query}`
+  );
+  return response.json();
+}

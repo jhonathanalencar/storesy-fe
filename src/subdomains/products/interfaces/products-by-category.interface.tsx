@@ -15,7 +15,7 @@ export function ProductsByCategoryInterface({
 }: ProductsByCategoryInterfaceProps) {
   return (
     <Section>
-      <div className="grid-cols-products grid place-items-center gap-4">
+      <div className="grid grid-cols-products place-items-center gap-4">
         {products.map((product) => {
           return (
             <ProductDetailsCard key={product.productId} product={product} />

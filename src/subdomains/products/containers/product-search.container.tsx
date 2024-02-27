@@ -1,3 +1,5 @@
+import { searchProducts } from '@shared/modules/queries/product.query';
+
 import { AppLayout } from '@shared/modules/layouts/app.layout';
 import { ProductSearchInterface } from '../interfaces/product-search.interface';
 
@@ -7,13 +9,14 @@ interface ProductSearchContainerProps {
   };
 }
 
-export function ProductSearchContainer({
+export async function ProductSearchContainer({
   searchParams,
 }: ProductSearchContainerProps) {
+  const products = await searchProducts(searchParams.query);
+
   return (
     <AppLayout>
-      <h1>{searchParams.query}</h1>
-      <ProductSearchInterface />
+      <ProductSearchInterface products={products} />
     </AppLayout>
   );
 }
