@@ -29,8 +29,8 @@ export function Sidebar({ categories }: SidebarProps) {
 
   return (
     <Dialog.Portal>
-      <Dialog.Overlay className="fixed inset-0 bg-black/70 data-[state=closed]:animate-fade-out data-[state=open]:animate-fade" />
-      <Dialog.Content className="fixed left-0 top-0 h-full w-11/12 max-w-xs overflow-hidden bg-zinc-600 data-[state=closed]:animate-right-slide-out data-[state=open]:animate-right-slide-in">
+      <Dialog.Overlay className="fixed inset-0 z-30 bg-black/70 data-[state=closed]:animate-fade-out data-[state=open]:animate-fade" />
+      <Dialog.Content className="fixed left-0 top-0 z-30 h-full w-11/12 max-w-xs overflow-hidden bg-zinc-600 data-[state=closed]:animate-right-slide-out data-[state=open]:animate-right-slide-in">
         <div className="flex h-12 w-full  items-center gap-1 bg-zinc-700 px-2 py-3 pl-6">
           <UserCircleIcon className="h-8 w-8 text-green-500" />
           <span className="text-zinc-300">{content}</span>

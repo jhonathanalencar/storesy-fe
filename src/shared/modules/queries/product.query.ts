@@ -14,7 +14,7 @@ export async function getProductBySlug(slug: string): Promise<TProduct> {
 
 export async function getProductsByCategory(
   categorySlug: string
-): Promise<TProduct[]> {
+): Promise<(TProduct & { rateAmount: number; totalScore: number })[]> {
   const response = await fetch(
     `${process.env.CATALOG_API_URL}/category/${categorySlug}/products`
   );

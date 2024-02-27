@@ -4,16 +4,24 @@ import type { TRate } from '@shared/modules/types/rate.type';
 
 interface ProductRatingProps {
   ratings: TRate[];
+  rateAmount?: number;
+  totalScore?: number;
 }
 
-export function ProductRating({ ratings }: ProductRatingProps) {
-  let averageCustomerReviews = 0;
+export function ProductRating({
+  ratings,
+  rateAmount = 0,
+  totalScore = 0,
+}: ProductRatingProps) {
+  let averageCustomerReviews = totalScore / rateAmount || 0;
+  let ratingsAmount = rateAmount;
 
   if (ratings.length > 0) {
     const totalRate = ratings.reduce((acc, val) => {
       return acc + val.score;
     }, 0);
     averageCustomerReviews = totalRate / ratings.length;
+    ratingsAmount = ratings.length;
   }
 
   return (
@@ -24,7 +32,7 @@ export function ProductRating({ ratings }: ProductRatingProps) {
           {averageCustomerReviews} / 5
         </span>
       </div>
-      <span className="text-zinc-400">・{ratings.length} ratings</span>
+      <span className="text-zinc-400">・{ratingsAmount} ratings</span>
     </div>
   );
 }

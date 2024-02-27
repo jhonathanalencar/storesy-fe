@@ -24,6 +24,9 @@ const config: Config = {
           },
         },
       },
+      gridTemplateColumns: {
+        products: 'repeat(auto-fit, minmax(16rem, 1fr))',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

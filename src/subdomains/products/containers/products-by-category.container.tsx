@@ -1,3 +1,5 @@
+import { getProductsByCategory } from '@shared/modules/queries/product.query';
+
 import { AppLayout } from '@shared/modules/layouts/app.layout';
 import { ProductsByCategoryInterface } from '../interfaces/products-by-category.interface';
 
@@ -5,13 +7,14 @@ interface ProductsByCategoryContainerProps {
   params: { slug: string };
 }
 
-export function ProductsByCategoryContainer({
+export async function ProductsByCategoryContainer({
   params,
 }: ProductsByCategoryContainerProps) {
+  const products = await getProductsByCategory(params.slug);
+
   return (
     <AppLayout>
-      <h1>{params.slug}</h1>
-      <ProductsByCategoryInterface />
+      <ProductsByCategoryInterface products={products} />
     </AppLayout>
   );
 }
