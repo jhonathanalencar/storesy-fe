@@ -59,7 +59,7 @@ export function ProductDetailsInterface({
           <h3 className="text-lg font-medium text-zinc-200">
             Product description
           </h3>
-          <p className="text-base tracking-wide text-zinc-400">
+          <p className="text-sm leading-normal tracking-wide text-zinc-300">
             {product.description}
           </p>
         </div>
@@ -67,7 +67,7 @@ export function ProductDetailsInterface({
         <ProductActions product={product} price={price} />
       </div>
 
-      <Separator />
+      <Separator className="my-4" />
 
       <CustomerReviews ratings={product.ratings} />
     </Section>

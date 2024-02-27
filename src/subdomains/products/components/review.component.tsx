@@ -5,6 +5,7 @@ import type { TRate } from '@shared/modules/types/rate.type';
 import { getUserById } from '@shared/modules/queries/user.query';
 
 import { ReviewStarRating } from './review-star-rating.component';
+import { ReviewDescription } from './review-description.component';
 
 interface ReviewProps {
   rating: TRate;
@@ -30,10 +31,10 @@ export async function Review({ rating }: ReviewProps) {
         <ReviewStarRating.Fill amount={rating.score} />
         <ReviewStarRating.Empty amount={5 - rating.score} />
       </ReviewStarRating.Root>
-      <p className="text-sm font-medium tracking-wide text-zinc-400">
+      <p className="text-sm font-normal tracking-wide text-zinc-400">
         Reviewed on {dayjs(rating.postedAt).format('MMMM DD, YYYY')}
       </p>
-      <p className="font-light text-zinc-300">{rating.description}</p>
+      <ReviewDescription description={rating.description} />
     </div>
   );
 }
