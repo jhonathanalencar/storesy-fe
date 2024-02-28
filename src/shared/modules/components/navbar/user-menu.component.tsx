@@ -1,3 +1,6 @@
+'use client';
+
+import Link from 'next/link';
 import { signOut } from 'next-auth/react';
 import type { Session } from 'next-auth';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
@@ -44,9 +47,14 @@ export function UserMenu({ user }: UserMenuProps) {
 
           <DropdownMenu.Separator className="h-px w-full bg-gray-600" />
 
-          <DropdownMenu.Item className="flex cursor-pointer items-center gap-2 rounded p-2 outline-none hover:bg-gray-700 focus-visible:ring-2 focus-visible:ring-green-500">
-            <ShoppingBagIcon className="h-6 w-6 text-green-500" />
-            <span>Orders</span>
+          <DropdownMenu.Item
+            asChild
+            className="flex cursor-pointer items-center gap-2 rounded p-2 outline-none hover:bg-gray-700 focus-visible:ring-2 focus-visible:ring-green-500"
+          >
+            <Link href="/orders">
+              <ShoppingBagIcon className="h-6 w-6 text-green-500" />
+              <span>Orders</span>
+            </Link>
           </DropdownMenu.Item>
 
           <DropdownMenu.Item
