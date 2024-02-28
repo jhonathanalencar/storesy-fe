@@ -41,11 +41,18 @@ export async function getBestSellers(
   return response.json();
 }
 
+export type SearchProductsResponse = {
+  total: number;
+  products: (TProduct & { rateAmount: number; totalScore: number })[];
+};
+
 export async function searchProducts(
-  query: string
-): Promise<(TProduct & { rateAmount: number; totalScore: number })[]> {
+  query: string,
+  page: number,
+  limit: number
+): Promise<SearchProductsResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/search?query=${query}`
+    `${process.env.CATALOG_API_URL}/search?query=${query}&page=${page}&limit=${limit}`
   );
   return response.json();
 }

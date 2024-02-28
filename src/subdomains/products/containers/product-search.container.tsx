@@ -12,11 +12,11 @@ interface ProductSearchContainerProps {
 export async function ProductSearchContainer({
   searchParams,
 }: ProductSearchContainerProps) {
-  const products = await searchProducts(searchParams.query);
+  const data = await searchProducts(searchParams.query, 1, 2);
 
   return (
     <AppLayout>
-      <ProductSearchInterface products={products} />
+      <ProductSearchInterface data={data} />
     </AppLayout>
   );
 }

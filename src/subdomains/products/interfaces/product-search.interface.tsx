@@ -1,19 +1,17 @@
-import type { TProduct } from '@shared/modules/types/product.type';
+import type { SearchProductsResponse } from '@shared/modules/queries/product.query';
 
 import { Section } from '@shared/modules/components/section.component';
 import { ProductDetailsCard } from '../components/product-details-card.component';
 
 interface ProductSearchInterfaceProps {
-  products: (TProduct & { rateAmount: number; totalScore: number })[];
+  data: SearchProductsResponse;
 }
 
-export function ProductSearchInterface({
-  products,
-}: ProductSearchInterfaceProps) {
+export function ProductSearchInterface({ data }: ProductSearchInterfaceProps) {
   return (
     <Section>
       <div className="grid grid-cols-products place-items-center gap-4">
-        {products.map((product) => {
+        {data.products.map((product) => {
           return (
             <ProductDetailsCard key={product.productId} product={product} />
           );
