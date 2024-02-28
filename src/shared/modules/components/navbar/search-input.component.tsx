@@ -1,8 +1,13 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
+import { twMerge } from 'tailwind-merge';
 
-export function SearchInput() {
+interface SearchInputProps {
+  className?: string;
+}
+
+export function SearchInput({ className = '' }: SearchInputProps) {
   const searchParams = useSearchParams();
   const query = searchParams.get('query');
 
@@ -14,7 +19,10 @@ export function SearchInput() {
       placeholder="Search"
       autoComplete="off"
       defaultValue={query ?? ''}
-      className="hidden h-full w-full bg-transparent p-2 text-zinc-400 outline-none sm:block"
+      className={twMerge(
+        'h-full w-full bg-transparent p-2 text-zinc-400 outline-none',
+        className
+      )}
     />
   );
 }

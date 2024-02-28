@@ -17,7 +17,7 @@ export async function NavbarTop({ cart }: NavbarTopProps) {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="navbar-content-grid mx-auto grid h-16 w-full max-w-5xl items-center gap-2 px-4 py-2">
+    <div className="navbar-content-grid mx-auto grid h-16 w-full max-w-5xl items-center gap-2 p-2">
       <div className="navbar-logo h-full">
         <Link
           href="/"
