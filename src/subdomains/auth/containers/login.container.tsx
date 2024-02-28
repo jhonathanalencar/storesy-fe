@@ -3,8 +3,8 @@ import { getServerSession } from 'next-auth';
 
 import { authOptions } from '@shared/modules/configs/auth.config';
 
-import { AppLayout } from '@shared/modules/layouts/app.layout';
 import { LoginInterface } from '../interfaces/login.interface';
+import { LoginLayout } from '@shared/modules/layouts/login.layout';
 
 interface LoginContainerProps {
   searchParams: {
@@ -18,8 +18,8 @@ export async function LoginContainer({ searchParams }: LoginContainerProps) {
   if (session?.user) redirect(redirect_to);
 
   return (
-    <AppLayout>
+    <LoginLayout>
       <LoginInterface redirectTo={redirect_to} />
-    </AppLayout>
+    </LoginLayout>
   );
 }

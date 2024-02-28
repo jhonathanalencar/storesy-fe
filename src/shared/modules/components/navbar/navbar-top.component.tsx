@@ -7,6 +7,7 @@ import { authOptions } from '../../configs/auth.config';
 import { ShoppingCartButton } from './shopping-cart-button.component';
 import { LoginButton } from './login-button.component';
 import { SearchBar } from './search-bar.component';
+import { Logo } from '../logo';
 
 interface NavbarTopProps {
   cart: Cart | null;
@@ -22,9 +23,7 @@ export async function NavbarTop({ cart }: NavbarTopProps) {
           href="/"
           className="inline-flex h-full items-center rounded-sm p-1 outline-1 transition-colors hover:outline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
         >
-          <span className="text-2xl font-black tracking-tight text-green-400">
-            Storesy
-          </span>
+          <Logo />
         </Link>
       </div>
 
