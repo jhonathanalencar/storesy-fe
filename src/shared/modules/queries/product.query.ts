@@ -12,11 +12,18 @@ export async function getProductBySlug(slug: string): Promise<TProduct> {
   return response.json();
 }
 
+export type GetProductsByCategoryResponse = {
+  total: number;
+  products: (TProduct & { rateAmount: number; totalScore: number })[];
+};
+
 export async function getProductsByCategory(
-  categorySlug: string
-): Promise<(TProduct & { rateAmount: number; totalScore: number })[]> {
+  categorySlug: string,
+  page: number,
+  limit: number
+): Promise<GetProductsByCategoryResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/category/${categorySlug}/products`
+    `${process.env.CATALOG_API_URL}/category/${categorySlug}/products?page=${page}&limit=${limit}`
   );
   return response.json();
 }

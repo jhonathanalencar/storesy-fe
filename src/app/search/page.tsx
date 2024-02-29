@@ -3,6 +3,7 @@ import { productRoutes } from '@subdomains/products/routes';
 interface SearchPageProps {
   searchParams: {
     query: string;
+    page: string;
   };
 }
 
