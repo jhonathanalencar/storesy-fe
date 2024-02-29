@@ -18,8 +18,8 @@ interface ProductDetailsCardProps {
 
 export function ProductDetailsCard({ product }: ProductDetailsCardProps) {
   return (
-    <Link href={`/products/${product.slug}`} className="w-fit">
-      <div className="relative z-0 flex h-full w-64 animate-fade-in flex-col gap-1 rounded bg-zinc-800 p-2 shadow-xl shadow-zinc-900">
+    <Link href={`/products/${product.slug}`} className="w-full max-w-[16rem]">
+      <div className="relative z-0 flex h-full w-full max-w-[16rem] animate-fade-in flex-col gap-1 rounded bg-zinc-800 p-2 shadow-xl shadow-zinc-900">
         {product.active ? (
           <div className="absolute left-2 top-2 z-[1] rounded-br bg-red-600 px-3 py-1">
             <span className="text-sm font-bold text-zinc-100">Deal</span>

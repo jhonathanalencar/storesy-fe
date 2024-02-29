@@ -6,17 +6,25 @@ import { ProductSearchInterface } from '../interfaces/product-search.interface';
 interface ProductSearchContainerProps {
   searchParams: {
     query: string;
+    page: string;
   };
 }
 
 export async function ProductSearchContainer({
   searchParams,
 }: ProductSearchContainerProps) {
-  const data = await searchProducts(searchParams.query, 1, 2);
+  const page = parseInt(searchParams.page ?? 1);
+  const itemsPerPage = 15;
+  const data = await searchProducts(searchParams.query, page, itemsPerPage);
+  const totalPages = Math.ceil(data.total / itemsPerPage);
 
   return (
     <AppLayout>
-      <ProductSearchInterface data={data} />
+      <ProductSearchInterface
+        data={data}
+        currentPage={page}
+        totalPages={totalPages}
+      />
     </AppLayout>
   );
 }
