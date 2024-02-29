@@ -12,8 +12,12 @@ interface PaginationBarProps {
 
 export function PaginationBar({ currentPage, totalPages }: PaginationBarProps) {
   const query = useSearchParams().get('query');
-  const maxPage = Math.min(totalPages, currentPage + 2);
-  const minPage = Math.max(1, currentPage - 2);
+  const amountOfPagesAroundCurrentPage = 2;
+  const maxPage = Math.min(
+    totalPages,
+    currentPage + amountOfPagesAroundCurrentPage
+  );
+  const minPage = Math.max(1, currentPage - amountOfPagesAroundCurrentPage);
   const numberedPageItems: JSX.Element[] = [];
   for (let page = minPage; page <= maxPage; page++) {
     numberedPageItems.push(
