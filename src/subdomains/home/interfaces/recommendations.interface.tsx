@@ -1,12 +1,15 @@
 import type { TProduct } from '@shared/modules/types/product.type';
-import type { GetProductsByCategoryResponse } from '@shared/modules/queries/product.query';
+import type {
+  GetProductsByCategoryResponse,
+  GetProductsDealsResponse,
+} from '@shared/modules/queries/product.query';
 
 import { ProductSlider } from '../components/product-slider.component';
 import { RecommendationBox } from '../components/recommendation-box.component';
 import { Section } from '@shared/modules/components/section.component';
 
 interface RecommendationsInterfaceProps {
-  deals: TProduct[];
+  deals: GetProductsDealsResponse;
   gamingProducts: GetProductsByCategoryResponse;
   newArrivals: TProduct[];
   bestSellers: TProduct[];
@@ -21,7 +24,7 @@ export function RecommendationsInterface({
   return (
     <Section>
       <RecommendationBox title="Deals" linkTo="/deals">
-        <ProductSlider products={deals} />
+        <ProductSlider products={deals.products} />
       </RecommendationBox>
       <RecommendationBox
         title="Gaming accessories"

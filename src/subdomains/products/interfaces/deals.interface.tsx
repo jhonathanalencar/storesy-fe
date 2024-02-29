@@ -1,20 +1,20 @@
-import type { GetProductsByCategoryResponse } from '@shared/modules/queries/product.query';
+import type { GetProductsDealsResponse } from '@/shared/modules/queries/product.query';
 
 import { Section } from '@shared/modules/components/section.component';
 import { ProductDetailsCard } from '../components/product-details-card.component';
 import { PaginationBar } from '@shared/modules/components/pagination-bar';
 
-interface ProductsByCategoryInterfaceProps {
-  products: GetProductsByCategoryResponse['products'];
+interface DealsInterfaceProps {
   currentPage: number;
   totalPages: number;
+  products: GetProductsDealsResponse['products'];
 }
 
-export function ProductsByCategoryInterface({
-  products,
+export function DealsInterface({
   currentPage,
   totalPages,
-}: ProductsByCategoryInterfaceProps) {
+  products,
+}: DealsInterfaceProps) {
   return (
     <Section>
       <div className="grid grid-cols-products place-items-center gap-4">

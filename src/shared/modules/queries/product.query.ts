@@ -28,8 +28,23 @@ export async function getProductsByCategory(
   return response.json();
 }
 
-export async function getProductDeals(): Promise<TProduct[]> {
-  const response = await fetch(`${process.env.CATALOG_API_URL}/deals`);
+export type GetProductsDealsResponse = {
+  total: number;
+  products: (TProduct & { rateAmount: number; totalScore: number })[];
+};
+
+export async function getProductDeals(
+  page: number,
+  limit: number
+): Promise<GetProductsDealsResponse> {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/deals?page=${page}&limit=${limit}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
   return response.json();
 }
 

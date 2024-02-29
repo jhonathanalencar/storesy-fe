@@ -10,7 +10,7 @@ import { AppLayout } from '@shared/modules/layouts/app.layout';
 
 export async function RecommendationsContainer() {
   const [deals, gamingProducts, newArrivals, bestSellers] = await Promise.all([
-    getProductDeals(),
+    getProductDeals(1, 10),
     getProductsByCategory('video-games', 1, 10),
     getNewArrivals(),
     getBestSellers('0', '9'),
