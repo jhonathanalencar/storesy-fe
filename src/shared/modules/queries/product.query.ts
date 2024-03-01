@@ -121,12 +121,12 @@ export type GetProductRatingsResponse = {
 };
 
 export async function getProductRatings(
-  productId: string,
+  slug: string,
   page: number,
   limit: number
 ): Promise<GetProductRatingsResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/products/${productId}/ratings?page=${page}&limit=${limit}`
+    `${process.env.CATALOG_API_URL}/slug/${slug}/ratings?page=${page}&limit=${limit}`
   );
   return response.json();
 }

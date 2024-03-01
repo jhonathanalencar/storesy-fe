@@ -15,10 +15,12 @@ export async function ProductDetailsContainer({
   params,
   searchParams,
 }: ProductDetailsContainerProps) {
-  const product = await getProductBySlug(params.slug);
   const page = parseInt(searchParams.page ?? '1');
   const itemsPerPage = 5;
-  const data = await getProductRatings(product.productId, page, itemsPerPage);
+  const [product, data] = await Promise.all([
+    getProductBySlug(params.slug),
+    getProductRatings(params.slug, page, itemsPerPage),
+  ]);
   const totalPages = Math.ceil(data.total / itemsPerPage);
 
   return (
