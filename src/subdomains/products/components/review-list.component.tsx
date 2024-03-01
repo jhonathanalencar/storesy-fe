@@ -1,13 +1,21 @@
-import type { TRate } from '@shared/modules/types/rate.type';
 import { FaceFrownIcon } from '@heroicons/react/24/outline';
 
+import type { GetProductRatingsResponse } from '@shared/modules/queries/product.query';
+
 import { Review } from './review.component';
+import { PaginationBar } from '@shared/modules/components/pagination-bar';
 
 interface ReviewListProps {
-  ratings: TRate[];
+  ratings: GetProductRatingsResponse['ratings'];
+  currentPage: number;
+  totalPages: number;
 }
 
-export function ReviewList({ ratings }: ReviewListProps) {
+export function ReviewList({
+  ratings,
+  currentPage,
+  totalPages,
+}: ReviewListProps) {
   const content =
     ratings.length > 0 ? (
       ratings.map((rating) => {
@@ -23,6 +31,7 @@ export function ReviewList({ ratings }: ReviewListProps) {
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 p-2">
       {content}
+      <PaginationBar currentPage={currentPage} totalPages={totalPages} />
     </div>
   );
 }

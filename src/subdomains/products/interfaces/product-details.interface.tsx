@@ -8,13 +8,20 @@ import { Separator } from '@shared/modules/components/separator.component';
 import { CustomerReviews } from '../components/customer-reviews.component';
 import { Section } from '@shared/modules/components/section.component';
 import { ProductActions } from '../components/product-actions.component';
+import { GetProductRatingsResponse } from '@/shared/modules/queries/product.query';
 
 interface ProductDetailsInterfaceProps {
   product: TProduct;
+  ratings: GetProductRatingsResponse['ratings'];
+  currentPage: number;
+  totalPages: number;
 }
 
 export function ProductDetailsInterface({
   product,
+  ratings,
+  currentPage,
+  totalPages,
 }: ProductDetailsInterfaceProps) {
   const discount = product.price * (product.discountPercent / 100);
   const price = product.price - discount;
@@ -69,7 +76,11 @@ export function ProductDetailsInterface({
 
       <Separator className="my-4" />
 
-      <CustomerReviews ratings={product.ratings} />
+      <CustomerReviews
+        ratings={ratings}
+        currentPage={currentPage}
+        totalPages={totalPages}
+      />
     </Section>
   );
 }

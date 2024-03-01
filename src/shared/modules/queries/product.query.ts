@@ -1,4 +1,5 @@
 import type { TProduct } from '../types/product.type';
+import { TRate } from '../types/rate.type';
 
 export async function getProducts(): Promise<TProduct[]> {
   const response = await fetch(`${process.env.CATALOG_API_URL}/products`);
@@ -110,6 +111,22 @@ export async function searchProducts(
 ): Promise<SearchProductsResponse> {
   const response = await fetch(
     `${process.env.CATALOG_API_URL}/search?query=${query}&page=${page}&limit=${limit}`
+  );
+  return response.json();
+}
+
+export type GetProductRatingsResponse = {
+  total: number;
+  ratings: TRate[];
+};
+
+export async function getProductRatings(
+  productId: string,
+  page: number,
+  limit: number
+): Promise<GetProductRatingsResponse> {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/products/${productId}/ratings?page=${page}&limit=${limit}`
   );
   return response.json();
 }
