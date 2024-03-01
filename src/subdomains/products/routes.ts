@@ -1,3 +1,4 @@
+import { BestSellersContainer } from './containers/best-sellers.container';
 import { DealsContainer } from './containers/deals.container';
 import { NewReleasesContainer } from './containers/new-releases.container';
 import { ProductDetailsContainer } from './containers/product-details.container';
@@ -10,4 +11,5 @@ export const productRoutes = {
   SEARCH_PAGE: ProductSearchContainer,
   DEALS: DealsContainer,
   NEW_RELEASES: NewReleasesContainer,
+  BEST_SELLERS: BestSellersContainer,
 };

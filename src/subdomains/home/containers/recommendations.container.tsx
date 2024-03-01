@@ -13,7 +13,7 @@ export async function RecommendationsContainer() {
     getProductDeals(1, 10),
     getProductsByCategory('video-games', 1, 10),
     getNewArrivals(1, 10),
-    getBestSellers('0', '9'),
+    getBestSellers(1, 10),
   ]);
 
   return (

@@ -1,20 +1,20 @@
-import type { SearchProductsResponse } from '@shared/modules/queries/product.query';
+import type { GetBestSellersResponse } from '@shared/modules/queries/product.query';
 
 import { Section } from '@shared/modules/components/section.component';
 import { ProductDetailsCard } from '../components/product-details-card.component';
 import { PaginationBar } from '@shared/modules/components/pagination-bar';
 
-interface ProductSearchInterfaceProps {
+interface BestSellersInterfaceProps {
   currentPage: number;
   totalPages: number;
-  products: SearchProductsResponse['products'];
+  products: GetBestSellersResponse['products'];
 }
 
-export function ProductSearchInterface({
-  products,
+export function BestSellersInterface({
   currentPage,
   totalPages,
-}: ProductSearchInterfaceProps) {
+  products,
+}: BestSellersInterfaceProps) {
   return (
     <Section>
       <div className="grid grid-cols-products place-items-center gap-4">
@@ -24,7 +24,7 @@ export function ProductSearchInterface({
           );
         })}
       </div>
-      <PaginationBar totalPages={totalPages} currentPage={currentPage} />
+      <PaginationBar currentPage={currentPage} totalPages={totalPages} />
     </Section>
   );
 }

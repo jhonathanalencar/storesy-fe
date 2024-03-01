@@ -13,7 +13,7 @@ interface ProductSearchContainerProps {
 export async function ProductSearchContainer({
   searchParams,
 }: ProductSearchContainerProps) {
-  const page = parseInt(searchParams.page ?? 1);
+  const page = parseInt(searchParams.page ?? '1');
   const itemsPerPage = 15;
   const data = await searchProducts(searchParams.query, page, itemsPerPage);
   const totalPages = Math.ceil(data.total / itemsPerPage);
@@ -21,7 +21,7 @@ export async function ProductSearchContainer({
   return (
     <AppLayout>
       <ProductSearchInterface
-        data={data}
+        products={data.products}
         currentPage={page}
         totalPages={totalPages}
       />

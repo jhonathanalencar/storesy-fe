@@ -63,12 +63,17 @@ export async function getNewArrivals(
   return response.json();
 }
 
+export type GetBestSellersResponse = {
+  total: number;
+  products: (TProduct & { rateAmount: number; totalScore: number })[];
+};
+
 export async function getBestSellers(
-  start: string,
-  stop: string
-): Promise<TProduct[]> {
+  page: number,
+  limit: number
+): Promise<GetBestSellersResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/best-sellers?start=${start}&stop=${stop}`
+    `${process.env.CATALOG_API_URL}/best-sellers?page=${page}&limit=${limit}`
   );
   return response.json();
 }

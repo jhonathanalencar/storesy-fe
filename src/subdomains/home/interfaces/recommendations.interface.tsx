@@ -1,5 +1,5 @@
-import type { TProduct } from '@shared/modules/types/product.type';
 import type {
+  GetBestSellersResponse,
   GetNewArrivalsResponse,
   GetProductsByCategoryResponse,
   GetProductsDealsResponse,
@@ -13,7 +13,7 @@ interface RecommendationsInterfaceProps {
   deals: GetProductsDealsResponse;
   gamingProducts: GetProductsByCategoryResponse;
   newArrivals: GetNewArrivalsResponse;
-  bestSellers: TProduct[];
+  bestSellers: GetBestSellersResponse;
 }
 
 export function RecommendationsInterface({
@@ -37,7 +37,7 @@ export function RecommendationsInterface({
         <ProductSlider products={newArrivals.products} />
       </RecommendationBox>
       <RecommendationBox title="Best sellers" linkTo="best-sellers">
-        <ProductSlider products={bestSellers} />
+        <ProductSlider products={bestSellers.products} />
       </RecommendationBox>
     </Section>
   );
