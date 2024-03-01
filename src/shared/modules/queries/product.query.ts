@@ -7,7 +7,12 @@ export async function getProducts(): Promise<TProduct[]> {
 
 export async function getProductBySlug(slug: string): Promise<TProduct> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/slug/${slug}/products`
+    `${process.env.CATALOG_API_URL}/slug/${slug}/products`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   return response.json();
 }
@@ -23,7 +28,12 @@ export async function getProductsByCategory(
   limit: number
 ): Promise<GetProductsByCategoryResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/category/${categorySlug}/products?page=${page}&limit=${limit}`
+    `${process.env.CATALOG_API_URL}/category/${categorySlug}/products?page=${page}&limit=${limit}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   return response.json();
 }
@@ -58,7 +68,12 @@ export async function getNewArrivals(
   limit: number
 ): Promise<GetNewArrivalsResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/new-arrivals?page=${page}&limit=${limit}`
+    `${process.env.CATALOG_API_URL}/new-arrivals?page=${page}&limit=${limit}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   return response.json();
 }
@@ -73,7 +88,12 @@ export async function getBestSellers(
   limit: number
 ): Promise<GetBestSellersResponse> {
   const response = await fetch(
-    `${process.env.CATALOG_API_URL}/best-sellers?page=${page}&limit=${limit}`
+    `${process.env.CATALOG_API_URL}/best-sellers?page=${page}&limit=${limit}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
   );
   return response.json();
 }

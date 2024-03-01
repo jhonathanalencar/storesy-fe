@@ -29,7 +29,7 @@ export function ProductRating({
       <div className="flex items-center gap-1">
         <StarIcon className=" h-6 w-6 text-green-500" />
         <span className="font-medium text-zinc-300">
-          {averageCustomerReviews} / 5
+          {averageCustomerReviews.toFixed(1)} / 5
         </span>
       </div>
       <span className="text-zinc-400">・{ratingsAmount} ratings</span>

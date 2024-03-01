@@ -7,9 +7,13 @@ import { addProductToCart } from '../actions';
 
 interface AddToCartButtonProps {
   cartProduct: TCartItem;
+  isAvailable: boolean;
 }
 
-export function AddToCartButton({ cartProduct }: AddToCartButtonProps) {
+export function AddToCartButton({
+  cartProduct,
+  isAvailable,
+}: AddToCartButtonProps) {
   const [isPending, startTransition] = useTransition();
 
   return (
@@ -25,8 +29,8 @@ export function AddToCartButton({ cartProduct }: AddToCartButtonProps) {
           });
         });
       }}
-      disabled={isPending}
-      className="mx-auto w-4/5 rounded bg-violet-600 py-2 font-semibold text-black transition-colors hover:bg-violet-700 md:w-52"
+      disabled={isPending || !isAvailable}
+      className="mx-auto w-4/5 rounded bg-violet-600 py-2 font-semibold text-black transition-colors hover:bg-violet-700 disabled:cursor-not-allowed disabled:bg-violet-800 md:w-52"
     >
       Add to Cart
     </button>

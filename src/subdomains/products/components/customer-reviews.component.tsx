@@ -27,7 +27,7 @@ export function CustomerReviews({ ratings }: CustomerReviewsProps) {
         <p className="flex items-center gap-2">
           <StarIcon className=" h-6 w-6 text-green-500" />
           <span className="font-medium text-zinc-300">
-            {averageRating} out of 5
+            {averageRating.toFixed(1)} out of 5
           </span>
         </p>
         <span className="text-zinc-400">{ratings.length} ratings</span>

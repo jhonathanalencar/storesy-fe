@@ -1,13 +1,13 @@
 import { twMerge } from 'tailwind-merge';
 
 interface ProductAvailabilityProps {
-  quantity_available: number;
+  quantityAvailable: number;
 }
 
 export function ProductAvailability({
-  quantity_available,
+  quantityAvailable,
 }: ProductAvailabilityProps) {
-  const isAvailable = quantity_available > 0;
+  const isAvailable = quantityAvailable > 0;
   const text = isAvailable ? 'In Stock' : 'Sold Out';
   return (
     <span

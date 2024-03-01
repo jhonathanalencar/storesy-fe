@@ -23,7 +23,7 @@ export async function Review({ rating }: ReviewProps) {
           sizes="100w"
           width={0}
           height={0}
-          className="h-8 w-8 rounded-full object-cover"
+          className="h-8 w-8 rounded-full bg-zinc-700 object-cover"
         />
         <span className="text-sm text-zinc-300 ">{user.name}</span>
       </div>
