@@ -48,8 +48,18 @@ export async function getProductDeals(
   return response.json();
 }
 
-export async function getNewArrivals(): Promise<TProduct[]> {
-  const response = await fetch(`${process.env.CATALOG_API_URL}/new-arrivals`);
+export type GetNewArrivalsResponse = {
+  total: number;
+  products: (TProduct & { rateAmount: number; totalScore: number })[];
+};
+
+export async function getNewArrivals(
+  page: number,
+  limit: number
+): Promise<GetNewArrivalsResponse> {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/new-arrivals?page=${page}&limit=${limit}`
+  );
   return response.json();
 }
 

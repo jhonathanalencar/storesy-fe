@@ -12,7 +12,7 @@ export async function RecommendationsContainer() {
   const [deals, gamingProducts, newArrivals, bestSellers] = await Promise.all([
     getProductDeals(1, 10),
     getProductsByCategory('video-games', 1, 10),
-    getNewArrivals(),
+    getNewArrivals(1, 10),
     getBestSellers('0', '9'),
   ]);
 
