@@ -9,7 +9,7 @@ export function RatingPercentageHistogram({
   ratings,
 }: RatingPercentageHistogramProps) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-full flex-col items-center gap-2">
       <HistogramRow ratings={ratings} startAmount="5" />
       <HistogramRow ratings={ratings} startAmount="4" />
       <HistogramRow ratings={ratings} startAmount="3" />
