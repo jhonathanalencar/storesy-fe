@@ -9,5 +9,5 @@ export function calculateRatingPercentage(
     rating.score.toString().startsWith(starAmount)
   ).length;
   const percentage = ((reviewsByStarAmount ?? 0) / ratings.length) * 100;
-  return percentage.toFixed(0);
+  return Math.floor(percentage);
 }

@@ -1,6 +1,9 @@
 import { StarIcon } from '@heroicons/react/24/solid';
 
-import type { GetProductRatingsResponse } from '@shared/modules/queries/product.query';
+import {
+  getProductRatings,
+  type GetProductRatingsResponse,
+} from '@shared/modules/queries/product.query';
 
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
 import { Separator } from '@shared/modules/components/separator.component';
@@ -8,21 +11,30 @@ import { ReviewList } from './review-list.component';
 
 interface CustomerReviewsProps {
   ratings: GetProductRatingsResponse['ratings'];
+  slug: string;
   currentPage: number;
   totalPages: number;
+  rateAmount?: number;
+  totalScore?: number;
 }
 
-export function CustomerReviews({
+export async function CustomerReviews({
   ratings,
+  slug,
   currentPage,
   totalPages,
+  rateAmount = 0,
+  totalScore = 0,
 }: CustomerReviewsProps) {
-  let averageRating = 0;
-  if (ratings.length > 0) {
-    averageRating =
-      ratings.reduce((acc, val) => {
-        return acc + val.score;
-      }, 0) / ratings.length;
+  const { ratings: totalRatings } = await getProductRatings(slug, 1, 200);
+  let averageCustomerReviews = totalScore / rateAmount || 0;
+  let ratingsAmount = rateAmount;
+  if (totalRatings.length > 0) {
+    const totalRate = totalRatings.reduce((acc, val) => {
+      return acc + val.score;
+    }, 0);
+    averageCustomerReviews = totalRate / totalRatings.length;
+    ratingsAmount = totalRatings.length;
   }
 
   return (
@@ -35,14 +47,14 @@ export function CustomerReviews({
           <p className="flex items-center gap-2">
             <StarIcon className=" h-6 w-6 text-green-500" />
             <span className="font-medium text-zinc-300">
-              {averageRating.toFixed(1)} out of 5
+              {averageCustomerReviews.toFixed(1)} out of 5
             </span>
           </p>
-          <span className="text-zinc-400">{ratings.length} ratings</span>
+          <span className="text-zinc-400">{ratingsAmount} ratings</span>
         </div>
         <Separator className="my-4" />
         <div className="flex justify-center">
-          <RatingPercentageHistogram ratings={ratings} />
+          <RatingPercentageHistogram ratings={totalRatings} />
         </div>
         <Separator className="my-4" />
       </div>

@@ -1,6 +1,9 @@
 import Image from 'next/image';
 
-import type { TProduct } from '@shared/modules/types/product.type';
+import type {
+  GetProductBySlugResponse,
+  GetProductRatingsResponse,
+} from '@shared/modules/queries/product.query';
 
 import { ProductRating } from '../components/product-rating.component';
 import { ProductPrice } from '../components/product-price.component';
@@ -8,10 +11,9 @@ import { Separator } from '@shared/modules/components/separator.component';
 import { CustomerReviews } from '../components/customer-reviews.component';
 import { Section } from '@shared/modules/components/section.component';
 import { ProductActions } from '../components/product-actions.component';
-import { GetProductRatingsResponse } from '@/shared/modules/queries/product.query';
 
 interface ProductDetailsInterfaceProps {
-  product: TProduct;
+  product: GetProductBySlugResponse;
   ratings: GetProductRatingsResponse['ratings'];
   currentPage: number;
   totalPages: number;
@@ -45,7 +47,11 @@ export function ProductDetailsInterface({
           <h1 className="text-xl font-semibold tracking-wide text-zinc-100">
             {product.name}
           </h1>
-          <ProductRating ratings={product.ratings} />
+          <ProductRating
+            ratings={[]}
+            rateAmount={product.rateAmount}
+            totalScore={product.totalScore}
+          />
 
           <Separator />
 
@@ -78,8 +84,11 @@ export function ProductDetailsInterface({
 
       <CustomerReviews
         ratings={ratings}
+        slug={product.slug}
         currentPage={currentPage}
         totalPages={totalPages}
+        rateAmount={product.rateAmount}
+        totalScore={product.totalScore}
       />
     </Section>
   );

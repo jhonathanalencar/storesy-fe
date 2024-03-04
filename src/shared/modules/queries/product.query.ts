@@ -6,7 +6,14 @@ export async function getProducts(): Promise<TProduct[]> {
   return response.json();
 }
 
-export async function getProductBySlug(slug: string): Promise<TProduct> {
+export type GetProductBySlugResponse = TProduct & {
+  rateAmount: number;
+  totalScore: number;
+};
+
+export async function getProductBySlug(
+  slug: string
+): Promise<GetProductBySlugResponse> {
   const response = await fetch(
     `${process.env.CATALOG_API_URL}/slug/${slug}/products`,
     {
