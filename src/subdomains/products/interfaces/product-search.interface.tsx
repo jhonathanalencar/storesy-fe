@@ -24,7 +24,13 @@ export function ProductSearchInterface({
           );
         })}
       </div>
-      <PaginationBar totalPages={totalPages} currentPage={currentPage} />
+      {products.length > 0 ? (
+        <PaginationBar totalPages={totalPages} currentPage={currentPage} />
+      ) : (
+        <h1 className="text-center text-xl font-bold text-zinc-100">
+          No results found
+        </h1>
+      )}
     </Section>
   );
 }

@@ -14,6 +14,7 @@ export function generateMetadata({
 }: SearchPageProps): Metadata {
   return {
     title: `Storesy | ${query}`,
+    description: `Showing results for ${query}`,
   };
 }
 
