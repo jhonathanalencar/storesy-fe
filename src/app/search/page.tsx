@@ -1,9 +1,19 @@
+import type { Metadata } from 'next';
+
 import { productRoutes } from '@subdomains/products/routes';
 
 interface SearchPageProps {
   searchParams: {
     query: string;
     page: string;
+  };
+}
+
+export function generateMetadata({
+  searchParams: { query },
+}: SearchPageProps): Metadata {
+  return {
+    title: `Storesy | ${query}`,
   };
 }
 

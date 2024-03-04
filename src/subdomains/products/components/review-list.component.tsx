@@ -31,7 +31,9 @@ export function ReviewList({
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-4 p-2">
       {content}
-      <PaginationBar currentPage={currentPage} totalPages={totalPages} />
+      {ratings.length > 0 ? (
+        <PaginationBar currentPage={currentPage} totalPages={totalPages} />
+      ) : null}
     </div>
   );
 }
