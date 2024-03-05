@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/react';
 
 import { Section } from '@shared/modules/components/section.component';
-import { Logo } from '@shared/modules/components/logo';
+import { Logo } from '@shared/modules/components/logo.component';
 
 interface LoginInterfaceProps {
   redirectTo: string;

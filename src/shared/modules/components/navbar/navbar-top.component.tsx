@@ -7,7 +7,7 @@ import { authOptions } from '../../configs/auth.config';
 import { ShoppingCartButton } from './shopping-cart-button.component';
 import { LoginButton } from './login-button.component';
 import { SearchBar } from './search-bar.component';
-import { Logo } from '../logo';
+import { Logo } from '../logo.component';
 
 interface NavbarTopProps {
   cart: Cart | null;
