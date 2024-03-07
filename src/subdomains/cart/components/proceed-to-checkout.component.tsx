@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import { formatPrice } from '@shared/modules/utils/format.utils';
 import { Cart } from '../entities';
 
@@ -23,9 +25,12 @@ export function ProceedToCheckout({ cart }: ProceedToCheckoutProps) {
               {cart.getCheckoutSize()}{' '}
               {cart.getCheckoutSize() > 1 ? 'items' : 'item'}
             </span>
-            <button className="mx-auto w-52 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-600">
+            <Link
+              href="/checkout"
+              className="mx-auto w-52 rounded bg-yellow-500 py-2 text-center font-semibold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-600"
+            >
               Proceed to checkout
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="flex flex-col gap-2">
