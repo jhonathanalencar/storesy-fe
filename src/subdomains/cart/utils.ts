@@ -48,7 +48,11 @@ export async function findCart(
     include: {
       items: {
         include: {
-          product: true,
+          product: {
+            include: {
+              discount: true,
+            },
+          },
         },
         orderBy: {
           product: {

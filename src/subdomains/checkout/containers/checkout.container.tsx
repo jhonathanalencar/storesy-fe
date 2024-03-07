@@ -10,7 +10,7 @@ export async function CheckoutContainer() {
   if (!cart) redirect('/cart');
   return (
     <CheckoutLayout itemsQuantity={cart.getCheckoutSize()}>
-      <CheckoutInterface />
+      <CheckoutInterface cart={cart} />
     </CheckoutLayout>
   );
 }
