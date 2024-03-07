@@ -1,3 +1,10 @@
+import { Section } from '@shared/modules/components/section.component';
+
 export function CheckoutInterface() {
-  return <h1>Mikasa</h1>;
+  return (
+    <Section>
+      <div>order items</div>
+      <div>order info</div>
+    </Section>
+  );
 }
