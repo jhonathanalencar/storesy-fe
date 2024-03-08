@@ -6,6 +6,7 @@ import { formatPrice } from '@shared/modules/utils/format.utils';
 import { Section } from '@shared/modules/components/section.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { CheckoutForm } from '../components/checkout-form.component';
+import { checkoutAction } from '../actions';
 
 interface CheckoutInterfaceProps {
   cart: Cart;
@@ -16,7 +17,10 @@ export function CheckoutInterface({ cart }: CheckoutInterfaceProps) {
 
   return (
     <Section>
-      <form className="grid grid-cols-1 gap-6 [grid-template-areas:'summary''payment''items'] md:grid-cols-[1fr_auto] md:[grid-template-areas:'payment_summary''items_summary']">
+      <form
+        action={checkoutAction}
+        className="grid grid-cols-1 gap-6 [grid-template-areas:'summary''payment''items'] md:grid-cols-[1fr_auto] md:[grid-template-areas:'payment_summary''items_summary']"
+      >
         <div className="rounded border border-zinc-700 p-2 [grid-area:payment]">
           <h2 className="mb-2 text-lg font-black text-zinc-100">Payment</h2>
           <CheckoutForm />
