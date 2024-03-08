@@ -4,7 +4,8 @@ import { Cart } from '@subdomains/cart/entities';
 import { formatPrice } from '@shared/modules/utils/format.utils';
 
 import { Section } from '@shared/modules/components/section.component';
-import { Separator } from '@/shared/modules/components/separator.component';
+import { Separator } from '@shared/modules/components/separator.component';
+import { CheckoutForm } from '../components/checkout-form.component';
 
 interface CheckoutInterfaceProps {
   cart: Cart;
@@ -15,7 +16,12 @@ export function CheckoutInterface({ cart }: CheckoutInterfaceProps) {
 
   return (
     <Section>
-      <div className="grid grid-cols-1 gap-6 [grid-template-areas:'summary''items'] md:grid-cols-[1fr_auto] md:[grid-template-areas:'items_summary']">
+      <form className="grid grid-cols-1 gap-6 [grid-template-areas:'summary''payment''items'] md:grid-cols-[1fr_auto] md:[grid-template-areas:'payment_summary''items_summary']">
+        <div className="rounded border border-zinc-700 p-2 [grid-area:payment]">
+          <h2 className="mb-2 text-lg font-black text-zinc-100">Payment</h2>
+          <CheckoutForm />
+        </div>
+
         <div className="rounded border border-zinc-700 p-2 [grid-area:items]">
           <h2 className="mb-2 text-lg font-black text-zinc-100">Items</h2>
           <div className="flex flex-col gap-3">
@@ -51,8 +57,11 @@ export function CheckoutInterface({ cart }: CheckoutInterfaceProps) {
           </div>
         </div>
 
-        <div className="h-fit max-w-[258px] rounded border border-zinc-700 px-2 py-3 [grid-area:summary]">
-          <button className="mb-4 w-60 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-storesy-gray-900">
+        <div className="h-fit max-w-[242px] rounded border border-zinc-700 px-2 py-3 [grid-area:summary]">
+          <button
+            type="submit"
+            className="mb-4 w-56 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-storesy-gray-900"
+          >
             Place your order
           </button>
           <h2 className="text-lg font-black text-zinc-100">Order Summary</h2>
@@ -71,7 +80,7 @@ export function CheckoutInterface({ cart }: CheckoutInterfaceProps) {
             <span>{formatPrice(cart.calculateCheckout() + shippingTax)}</span>
           </p>
         </div>
-      </div>
+      </form>
     </Section>
   );
 }
