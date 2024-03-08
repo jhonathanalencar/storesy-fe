@@ -4,7 +4,7 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 import { getCart } from '../cart/utils';
-import { createOrder } from './queries';
+import { CreateOrderResponse, createOrder } from './queries';
 import { generateCardHash } from './utils';
 import { authOptions } from '@shared/modules/configs/auth.config';
 
@@ -20,17 +20,18 @@ export async function checkoutAction(formData: FormData) {
   const securityCode = formData.get('securityCode');
   const data = `${cardNumber}|${nameOnCard}|${expirationDateMonth}|${expirationDateYear}|${securityCode}`;
   const cardHash = generateCardHash(data);
+  let order: CreateOrderResponse;
   try {
-    const order = await createOrder(
+    order = await createOrder(
       session.user.id,
       cardHash,
       cart.getSelectedItems()
     );
-    redirect(`/checkout/${order.orderId}/success`);
   } catch (error) {
     console.error(error);
     return {
       error: { message: 'Order has failed to complete.' },
     };
   }
+  redirect(`/checkout/${order.orderId}/success`);
 }
