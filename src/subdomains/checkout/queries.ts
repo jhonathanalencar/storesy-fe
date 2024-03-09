@@ -32,3 +32,35 @@ export async function createOrder(
   });
   return response.json();
 }
+
+export type GetOrderResponse = {
+  orderId: string;
+  customerId: string;
+  status: OrderStatusType;
+  total: number;
+  createdAt: Date;
+  items: {
+    orderItemId: string;
+    productId: string;
+    quantity: number;
+    price: number;
+    name: string;
+    imageUrl: string;
+  }[];
+};
+
+export async function getOrder(
+  userId: string,
+  orderId: string
+): Promise<GetOrderResponse> {
+  const response = await fetch(
+    `${process.env.ORDERS_API_URL}/orders/${orderId}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${userId}`,
+      },
+    }
+  );
+  return response.json();
+}
