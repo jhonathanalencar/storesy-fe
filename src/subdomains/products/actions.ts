@@ -94,3 +94,25 @@ export async function clearCheckout() {
   });
   revalidatePath('/products/[slug]', 'page');
 }
+
+export async function selectAllItems() {
+  const cart = await getCart();
+  if (!cart) return;
+  await prisma.cartItem.updateMany({
+    data: {
+      selected: true,
+    },
+  });
+  revalidatePath('/cart', 'page');
+}
+
+export async function deselectAllItems() {
+  const cart = await getCart();
+  if (!cart) return;
+  await prisma.cartItem.updateMany({
+    data: {
+      selected: false,
+    },
+  });
+  revalidatePath('/cart', 'page');
+}
