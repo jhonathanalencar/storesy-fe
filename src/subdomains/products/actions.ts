@@ -81,3 +81,16 @@ export async function selectProductItem(productId: string) {
   });
   revalidatePath('/products/[slug]', 'page');
 }
+
+export async function clearCheckout() {
+  const cart = await getCart();
+  if (!cart) return;
+  await prisma.cartItem.deleteMany({
+    where: {
+      selected: {
+        equals: true,
+      },
+    },
+  });
+  revalidatePath('/products/[slug]', 'page');
+}

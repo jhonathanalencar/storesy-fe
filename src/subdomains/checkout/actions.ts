@@ -7,6 +7,7 @@ import { getCart } from '../cart/utils';
 import { CreateOrderResponse, createOrder } from './queries';
 import { generateCardHash } from './utils';
 import { authOptions } from '@shared/modules/configs/auth.config';
+import { clearCheckout } from '../products/actions';
 
 export async function checkoutAction(formData: FormData) {
   const cart = await getCart();
@@ -27,6 +28,7 @@ export async function checkoutAction(formData: FormData) {
       cardHash,
       cart.getSelectedItems()
     );
+    await clearCheckout();
   } catch (error) {
     console.error(error);
     return {

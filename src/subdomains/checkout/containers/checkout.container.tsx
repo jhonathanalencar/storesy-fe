@@ -7,7 +7,7 @@ import { CheckoutInterface } from '../interfaces/checkout.interface';
 
 export async function CheckoutContainer() {
   const cart = await getCart();
-  if (!cart) redirect('/cart');
+  if (!cart || cart.getCheckoutSize() === 0) redirect('/cart');
   return (
     <CheckoutLayout itemsQuantity={cart.getCheckoutSize()}>
       <CheckoutInterface cart={cart} />
