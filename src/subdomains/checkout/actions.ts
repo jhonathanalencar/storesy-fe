@@ -1,7 +1,8 @@
 'use server';
 
-import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
+import { getServerSession } from 'next-auth';
 
 import { getCart } from '../cart/utils';
 import { generateCardHash } from './utils';
@@ -38,5 +39,6 @@ export async function checkoutAction(formData: FormData) {
       error: { message: 'Order has failed to complete.' },
     };
   }
+  revalidatePath('/orders', 'page');
   redirect(`/checkout/${order.orderId}/success`);
 }

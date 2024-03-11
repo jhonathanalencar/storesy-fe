@@ -64,3 +64,21 @@ export async function getOrder(
   );
   return response.json();
 }
+
+export type GetOrdersResponse = {
+  orderId: string;
+  customerId: string;
+  status: OrderStatusType;
+  total: number;
+  createdAt: Date;
+}[];
+
+export async function getOrders(userId: string): Promise<GetOrdersResponse> {
+  const response = await fetch(`${process.env.ORDERS_API_URL}/orders`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${userId}`,
+    },
+  });
+  return response.json();
+}

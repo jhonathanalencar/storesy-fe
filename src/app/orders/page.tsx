@@ -1,3 +1,5 @@
+import { orderRoutes } from '@subdomains/orders/routes';
+
 export default function OrdersPage() {
-  return <h1>Mikasa</h1>;
+  return <orderRoutes.ORDERS />;
 }

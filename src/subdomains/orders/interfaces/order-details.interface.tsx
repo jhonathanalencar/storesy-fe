@@ -7,6 +7,7 @@ import type {
   OrderStatusType,
 } from '@shared/modules/queries/order.query';
 import { formatPrice } from '@shared/modules/utils/format.utils';
+import { statusText } from '../constants';
 
 import { Section } from '@shared/modules/components/section.component';
 
@@ -14,11 +15,6 @@ interface OrderDetailsInterfaceProps {
   order: GetOrderResponse;
 }
 
-const statusText: Record<OrderStatusType, string> = {
-  PENDING: 'Pending',
-  PAID: 'Paid',
-  FAILED: 'Failed',
-};
 const statusIcon: Record<OrderStatusType, JSX.Element> = {
   PENDING: (
     <ClockIcon className="h-12 w-12 rounded-full border border-yellow-500 text-zinc-300" />
