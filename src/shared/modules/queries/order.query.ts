@@ -1,6 +1,6 @@
-import { CartItem } from '../cart/entities';
+import { CartItem } from '@subdomains/cart/entities';
 
-type OrderStatusType = 'PENDING' | 'PAID' | 'FAILED';
+export type OrderStatusType = 'PENDING' | 'PAID' | 'FAILED';
 export type CreateOrderResponse = {
   orderId: string;
   customerId: string;

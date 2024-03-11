@@ -1,41 +1,50 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import dayjs from 'dayjs';
+import { CheckIcon, ClockIcon, XMarkIcon } from '@heroicons/react/24/solid';
 
+import type {
+  GetOrderResponse,
+  OrderStatusType,
+} from '@shared/modules/queries/order.query';
 import { formatPrice } from '@shared/modules/utils/format.utils';
-import type { GetOrderResponse } from '@shared/modules/queries/order.query';
 
 import { Section } from '@shared/modules/components/section.component';
 
-interface CheckoutSuccessInterfaceProps {
+interface OrderDetailsInterfaceProps {
   order: GetOrderResponse;
 }
 
-export function CheckoutSuccessInterface({
-  order,
-}: CheckoutSuccessInterfaceProps) {
+const statusText: Record<OrderStatusType, string> = {
+  PENDING: 'Pending',
+  PAID: 'Paid',
+  FAILED: 'Failed',
+};
+const statusIcon: Record<OrderStatusType, JSX.Element> = {
+  PENDING: (
+    <ClockIcon className="h-12 w-12 rounded-full border border-yellow-500 text-zinc-300" />
+  ),
+  PAID: (
+    <CheckIcon className="h-12 w-12 rounded-full border border-yellow-500 p-1 text-green-500" />
+  ),
+  FAILED: (
+    <XMarkIcon className="h-12 w-12 rounded-full border border-yellow-500 p-1 text-red-500" />
+  ),
+};
+
+export function OrderDetailsInterface({ order }: OrderDetailsInterfaceProps) {
   return (
     <Section>
-      <h1 className="flex flex-col items-center gap-2 md:flex-row">
-        <CheckCircleIcon className="h-12 w-12 text-green-500" />
-        <span className="text-center text-xl font-semibold text-zinc-200 md:text-2xl">
-          Your order has been placed!
-        </span>
-      </h1>
-      <span className="block text-center text-base font-medium text-zinc-300 md:text-left md:text-lg">
-        Your order is currently being processed.
+      <span className="text-sm font-medium tracking-wide text-zinc-300">
+        Placed on {dayjs(order.createdAt).format('dddd, MMMM DD, YYYY hh:mm A')}
       </span>
-      <Link
-        href={`/orders/${order.orderId}`}
-        className="my-4 block w-fit rounded bg-yellow-500 px-4 py-2 font-bold text-black transition-colors hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500 focus-visible:ring-offset-2 focus-visible:ring-offset-storesy-gray-900 disabled:cursor-not-allowed disabled:bg-yellow-600"
-      >
-        Check Status
-      </Link>
-
-      <div className="overflow-x-auto">
-        <span className="mb-2 block text-xl font-bold text-zinc-100">
-          Summary
+      <div className="my-4 flex items-center gap-2">
+        <span>{statusIcon[order.status]}</span>
+        <span className="text-lg font-bold text-zinc-100">
+          {statusText[order.status]}
         </span>
+      </div>
+      <h3 className="mb-2 block text-xl font-bold text-zinc-200">Summary</h3>
+      <div className="overflow-x-auto">
         <table className="table w-full border-collapse border border-zinc-700 shadow-md">
           <thead>
             <tr className="bg-zinc-950">

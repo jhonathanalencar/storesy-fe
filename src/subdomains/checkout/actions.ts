@@ -4,10 +4,13 @@ import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 import { getCart } from '../cart/utils';
-import { CreateOrderResponse, createOrder } from './queries';
 import { generateCardHash } from './utils';
 import { authOptions } from '@shared/modules/configs/auth.config';
 import { clearCheckout } from '../products/actions';
+import {
+  type CreateOrderResponse,
+  createOrder,
+} from '@shared/modules/queries/order.query';
 
 export async function checkoutAction(formData: FormData) {
   const cart = await getCart();
