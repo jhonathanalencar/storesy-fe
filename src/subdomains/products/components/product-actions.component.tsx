@@ -7,6 +7,7 @@ import { useSelectedQuantity } from '@shared/modules/hooks/use-selected-quantity
 import { ProductAvailability } from './product-availability.component';
 import { QuantitySelect } from './quantity-select.component';
 import { AddToCartButton } from './add-to-cart-button.component';
+import { BuyNowButton } from './buy-now-button.component';
 
 interface ProductActions {
   product: TProduct;
@@ -44,12 +45,18 @@ export function ProductActions({ product, price }: ProductActions) {
             quantity_available: product.quantity,
           }}
         />
-        <button
-          disabled={!isAvailable}
-          className="mx-auto w-4/5 rounded bg-yellow-500 py-2 font-semibold text-black transition-colors hover:bg-yellow-600 disabled:cursor-not-allowed disabled:bg-yellow-700 md:w-52"
-        >
-          Buy Now
-        </button>
+        <BuyNowButton
+          isAvailable={isAvailable}
+          cartProduct={{
+            product_id: product.productId,
+            product_slug: product.slug,
+            subtotal: price,
+            product_url: product.imageUrl,
+            product_title: product.name,
+            product_quantity: Number(selectedQuantity.value),
+            quantity_available: product.quantity,
+          }}
+        />
       </div>
     </div>
   );
