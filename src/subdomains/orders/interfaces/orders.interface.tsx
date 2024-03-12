@@ -39,17 +39,21 @@ export function OrdersInterface({ orders }: OrdersInterfaceProps) {
           <tbody>
             {orders.map((order, index) => {
               return (
-                <tr key={order.orderId} className="odd:bg-zinc-800">
+                <tr
+                  key={order.orderId}
+                  data-status={order.status}
+                  className="group odd:bg-zinc-800 even:bg-storesy-gray-900 data-[status=FAILED]:opacity-80 data-[status=PAID]:opacity-80"
+                >
                   <td className="p-2 text-sm font-black text-zinc-100">
                     {index + 1}
                   </td>
                   <td className="p-2 text-sm text-zinc-300">
                     {dayjs(order.createdAt).format('MMMM DD, YYYY')}
                   </td>
-                  <td className="p-2 text-sm font-bold text-zinc-100">
+                  <td className="p-2 text-sm font-bold text-zinc-100 group-data-[status=FAILED]:text-red-500 group-data-[status=PAID]:text-green-500">
                     {formatPrice(order.total)}
                   </td>
-                  <td className="p-2 text-sm font-bold text-zinc-200">
+                  <td className="p-2 text-sm font-bold text-zinc-200 group-data-[status=FAILED]:text-red-500 group-data-[status=PAID]:text-green-500">
                     {statusText[order.status]}
                   </td>
                   <td className="p-2 text-sm text-yellow-500">
