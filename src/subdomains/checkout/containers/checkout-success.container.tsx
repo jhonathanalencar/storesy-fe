@@ -17,6 +17,7 @@ export async function CheckoutSuccessContainer({
   const session = await getServerSession(authOptions);
   if (!session?.user) redirect('/login');
   const order = await getOrder(session.user.id, params.id);
+  if (!order.orderId) redirect('/');
   return (
     <AppLayout>
       <CheckoutSuccessInterface order={order} />

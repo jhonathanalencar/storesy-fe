@@ -137,3 +137,22 @@ export async function getProductRatings(
   );
   return response.json();
 }
+
+export async function updateProductQuantity(
+  productId: string,
+  quantity: number
+): Promise<void> {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/products/${productId}/decrease`,
+    {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        quantity,
+      }),
+    }
+  );
+  return response.json();
+}

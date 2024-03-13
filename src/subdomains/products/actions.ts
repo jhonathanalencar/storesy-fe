@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 
 import { createCart, getCart } from '../cart/utils';
 import { prisma } from '@/externals/storage/prisma.storage';
+import { updateProductQuantity } from '@shared/modules/queries/product.query';
 
 export async function addProductToCart(productId: string, quantity: number) {
   const cart = (await getCart()) ?? (await createCart());
@@ -86,6 +87,9 @@ export async function selectProductItem(productId: string) {
 export async function clearCheckout() {
   const cart = await getCart();
   if (!cart) return;
+  cart.getSelectedItems().map(async (item) => {
+    await updateProductQuantity(item.product_id, item.quantity);
+  });
   await prisma.cartItem.deleteMany({
     where: {
       selected: {
