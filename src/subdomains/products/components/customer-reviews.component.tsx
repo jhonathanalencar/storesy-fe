@@ -8,6 +8,7 @@ import {
 import { RatingPercentageHistogram } from './rating-percentage-histogram.component';
 import { Separator } from '@shared/modules/components/separator.component';
 import { ReviewList } from './review-list.component';
+import { WriteReview } from './write-review.component';
 
 interface CustomerReviewsProps {
   ratings: GetProductRatingsResponse['ratings'];
@@ -56,6 +57,8 @@ export async function CustomerReviews({
         <div className="flex justify-center">
           <RatingPercentageHistogram ratings={totalRatings} />
         </div>
+        <Separator className="my-4" />
+        <WriteReview />
         <Separator className="my-4" />
       </div>
 
