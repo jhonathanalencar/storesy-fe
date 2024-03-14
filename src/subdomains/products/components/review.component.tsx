@@ -13,19 +13,24 @@ interface ReviewProps {
 
 export async function Review({ rating }: ReviewProps) {
   const user = await getUserById(rating.userId);
-
+  let imageUrl = user.imageUrl;
+  let username = user.name;
+  if ('isError' in user) {
+    imageUrl = '/user-icon.svg';
+    username = 'Anonymous User';
+  }
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center gap-2">
         <Image
-          alt={user.name}
-          src={user.imageUrl}
+          alt={username}
+          src={imageUrl}
           sizes="100w"
           width={0}
           height={0}
-          className="h-8 w-8 rounded-full bg-zinc-700 object-cover"
+          className="h-8 w-8 rounded-full bg-zinc-700 object-cover p-0.5"
         />
-        <span className="text-sm text-zinc-300 ">{user.name}</span>
+        <span className="text-sm text-zinc-300 ">{username}</span>
       </div>
       <ReviewStarRating.Root>
         <ReviewStarRating.Fill amount={rating.score} />
