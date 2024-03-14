@@ -7,7 +7,7 @@ export function WriteReview() {
       <p className="text-sm text-zinc-400">
         Share your thoughts with other customers
       </p>
-      <Button className="mt-4 w-full max-w-xs">Write a customer review</Button>
+      <Button className="mt-4 w-full max-w-xs">Write a review</Button>
     </div>
   );
 }

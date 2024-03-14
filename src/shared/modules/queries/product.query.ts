@@ -156,3 +156,23 @@ export async function updateProductQuantity(
   );
   return response.json();
 }
+
+export async function createReview(
+  productId: string,
+  userId: string,
+  score: number,
+  description: string
+) {
+  const response = await fetch(
+    `${process.env.CATALOG_API_URL}/products/${productId}/rating`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${userId}`,
+      },
+      body: JSON.stringify({ score, description }),
+    }
+  );
+  return response.json();
+}
