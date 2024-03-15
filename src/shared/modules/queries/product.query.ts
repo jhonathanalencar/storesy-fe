@@ -157,12 +157,19 @@ export async function updateProductQuantity(
   return response.json();
 }
 
+export type createReviewResponse =
+  | {
+      message: string;
+      isError: boolean;
+    }
+  | { rateId: string };
+
 export async function createReview(
   productId: string,
   userId: string,
   score: number,
   description: string
-) {
+): Promise<createReviewResponse> {
   const response = await fetch(
     `${process.env.CATALOG_API_URL}/products/${productId}/rating`,
     {

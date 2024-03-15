@@ -5,7 +5,13 @@ import { redirect } from 'next/navigation';
 
 import { createCart, getCart } from '../cart/utils';
 import { prisma } from '@/externals/storage/prisma.storage';
-import { updateProductQuantity } from '@shared/modules/queries/product.query';
+import {
+  createReview,
+  getProductBySlug,
+  updateProductQuantity,
+} from '@shared/modules/queries/product.query';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/shared/modules/configs/auth.config';
 
 export async function addProductToCart(productId: string, quantity: number) {
   const cart = (await getCart()) ?? (await createCart());
@@ -156,4 +162,39 @@ export async function buyNow(productId: string, quantity: number) {
   }
   revalidatePath('/products/[slug]', 'page');
   redirect('/checkout');
+}
+
+export async function createReviewAction(
+  formData: FormData,
+  productSlug: string
+) {
+  try {
+    const product = await getProductBySlug(productSlug);
+    if (!product) {
+      throw new Error('Product not found');
+    }
+    const session = await getServerSession(authOptions);
+    if (!session?.user) {
+      redirect('/login');
+    }
+    const score = formData.get('score') as string;
+    const description = formData.get('description') as string;
+    const data = await createReview(
+      product.productId,
+      session.user.id,
+      parseInt(score),
+      description
+    );
+    if ('isError' in data) {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+    return {
+      error: { message: 'Failed to create review' },
+    };
+  }
+  revalidatePath('/products/[slug]', 'page');
 }

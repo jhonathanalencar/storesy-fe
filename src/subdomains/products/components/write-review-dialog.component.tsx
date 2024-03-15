@@ -1,7 +1,12 @@
-import { useState } from 'react';
+import { useTransition, useState, useRef } from 'react';
+import { useParams } from 'next/navigation';
 import * as Dialog from '@radix-ui/react-dialog';
 import * as RadioGroup from '@radix-ui/react-radio-group';
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import { toast } from 'sonner';
+import { CheckCircleIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { ExclamationCircleIcon } from '@heroicons/react/24/outline';
+
+import { createReviewAction } from '../actions';
 
 import { Separator } from '@shared/modules/components/separator.component';
 import { ReviewStarRating } from './review-star-rating.component';
@@ -9,6 +14,9 @@ import { Button } from '@shared/modules/components/button.component';
 
 export function WriteReviewDialog() {
   const [score, setScore] = useState(0);
+  const [isPending, startTransition] = useTransition();
+  const params = useParams<{ slug: string }>();
+  const formRef = useRef<HTMLFormElement>(null);
 
   return (
     <Dialog.Portal>
@@ -26,7 +34,30 @@ export function WriteReviewDialog() {
 
             <Separator className="bg-zinc-600" />
 
-            <form action="" className="flex w-full flex-col">
+            <form
+              ref={formRef}
+              action={(formData) => {
+                startTransition(async () => {
+                  const data = await createReviewAction(formData, params.slug);
+                  if (data?.error) {
+                    toast(data.error.message, {
+                      icon: (
+                        <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
+                      ),
+                    });
+                    return;
+                  }
+                  setScore(0);
+                  formRef.current?.reset();
+                  toast('Review created successfully', {
+                    icon: (
+                      <CheckCircleIcon className="h-6 w-6 text-green-500" />
+                    ),
+                  });
+                });
+              }}
+              className="flex w-full flex-col"
+            >
               <span className="block text-lg text-zinc-100">Rating</span>
               <RadioGroup.Root
                 defaultValue="0"
@@ -34,6 +65,8 @@ export function WriteReviewDialog() {
                 onValueChange={(value) => setScore(parseInt(value))}
                 value={String(score)}
                 className="flex gap-1"
+                name="score"
+                required
               >
                 <RadioGroup.Item
                   value="1"
@@ -94,6 +127,7 @@ export function WriteReviewDialog() {
                 <textarea
                   name="description"
                   id="description"
+                  required
                   className="h-28 resize-none rounded border border-zinc-600 bg-zinc-800 p-2 text-sm text-zinc-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-700"
                 />
               </div>
@@ -101,7 +135,7 @@ export function WriteReviewDialog() {
               <Separator className="bg-zinc-600" />
 
               <div className="ml-auto">
-                <Button type="submit" className="w-40">
+                <Button type="submit" disabled={isPending} className="w-40">
                   Submit
                 </Button>
               </div>
